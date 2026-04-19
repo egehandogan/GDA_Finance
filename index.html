@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDA Finance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Sidebar Navigation -->
+        <nav id="sb-nav">
+            <div class="sn-head">
+                <div style="display:flex;align-items:center;gap:8px">
+                    <div class="sl-logo" style="width:24px;height:24px;border-radius:6px;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">GF</div>
+                    <span class="sn-title">GDA Finance</span>
+                </div>
+                <button class="sn-collapse" id="nav-toggle-btn" title="Daralt/Genişlet">‹</button>
+            </div>
+            <div class="sn-tabs">
+                <button class="sn-tab active" id="tab-main">Ana</button>
+                <button class="sn-tab" id="tab-analiz">Analiz</button>
+            </div>
+
+            <div id="nav-content">
+                <!-- Navigation items will be rendered here by router.js/sidebar.js -->
+            </div>
+
+            <div class="sn-footer">
+                <div class="sn-company" id="profile-trigger">
+                    <div class="sn-av">G</div>
+                    <div class="sn-info">
+                        <div style="font-size:12px;font-weight:600;color:var(--t1)">GDA Kurumsal</div>
+                        <div style="font-size:10.5px;color:var(--t3)">Admin Paneli</div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Profile Popover -->
+        <div class="profile-popover" id="profile-popover">
+            <div class="pp-item" id="pp-support">
+                <span class="pp-icon">🎧</span> Destek Talebi
+            </div>
+            <div class="pp-item" id="pp-admin">
+                <span class="pp-icon">⚙️</span> Admin Ata
+            </div>
+            <div class="pp-sep"></div>
+            <div class="pp-item danger" id="pp-logout">
+                <span class="pp-icon">🚪</span> Çıkış Yap
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main id="content">
+            <header class="topbar">
+                <div class="tb-nav">
+                    <button class="tb-arrow" id="tb-back">‹</button>
+                    <span class="tb-sep">/</span>
+                    <div id="breadcrumb" style="display:flex;gap:4px;align-items:center">
+                        <span class="tb-crumb">Finance</span>
+                    </div>
+                </div>
+                <div class="tb-right">
+                    <button class="tb-icon-btn" title="Bildirimler">🔔</button>
+                    <div class="tb-avatar">E</div>
+                </div>
+            </header>
+
+            <div id="page-header-container">
+                <!-- Page header will be injected here -->
+            </div>
+            
+            <div id="filter-bar-container">
+                <!-- Filter bar will be injected here -->
+            </div>
+
+            <div class="page-body" id="page-body">
+                <!-- Page content will be injected here -->
+                <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--t3)">
+                    Yükleniyor...
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal-container"></div>
+    <div id="toast"></div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
