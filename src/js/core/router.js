@@ -1,117 +1,102 @@
 import { S, saveStore } from './state.js';
-import { PAGE_META } from './constants.js';
+import { toast } from '../components/ui.js';
 
 /**
- * SPA Router
- * Handles navigation, page headers, and module rendering orchestration.
+ * Dynamic SPA Router
+ * Maps views to page modules and handles navigation state.
  */
-export function navigate(view) {
-    S.view = view;
-    saveStore();
 
-    // 1. Update Navigation UI Active States
-    updateNavigationUI(view);
+// Route Mapping (View Name -> Module Filename)
+const ROUTES = {
+  'dashboard': 'dashboard',
+  'gelirler': 'income',
+  'giderler': 'expenses',
+  'faturalar': 'invoices',
+  'fatura-edit': 'invoices',
+  'musteriler': 'customers',
+  'hesaplar': 'accounts',
+  'kartlar': 'accounts',
+  'urunler': 'products',
+  'personeller': 'staff',
+  'analiz': 'analysis',
+  'raporlar': 'analysis',
+  'kdv': 'analysis',
+  'maas-hesap': 'staff',
+  'toplu-hesap': 'products',
+  'is-takip': 'projects',
+  'odeme-takip': 'tasks',
+  'takvim': 'calendar',
+  'ayarlar': 'settings',
+  'ocr': 'expenses'
+};
 
-    // 2. Prepare Page Metadata
-    const meta = PAGE_META[view] || { title: view, sub: '' };
-    renderPageHeader(meta);
+export async function navigate(view, params = null) {
+  if (!S.isLoggedIn && view !== 'login') {
+    S.view = 'login';
+    return renderModule('login');
+  }
 
-    // 3. Clean up and Prepare Page Body
-    const pb = document.getElementById('page-body');
-    if (pb) {
-        pb.innerHTML = ''; // Clear current content
-        pb.classList.remove('anim');
-        void pb.offsetWidth; // Trigger reflow for animation
-        pb.classList.add('anim');
+  // Update State
+  S.view = view;
+  S.activeParams = params;
+  saveStore();
+
+  // Update Sidebar UI
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.view === view);
+  });
+
+  // Breadcrumb / Title Updates
+  updateBreadcrumbs(view);
+
+  // Dynamic Module Loading
+  try {
+    const moduleName = ROUTES[view];
+    if (moduleName) {
+      // Lazy load the page module with static extension for Vite
+      const module = await import(`../pages/${moduleName}.js`);
+      
+      // Look for a specific render function or default to a generic one
+      const renderFnName = `render${view.charAt(0).toUpperCase() + view.slice(1).replace(/-([a-z])/g, (g) => g[1].toUpperCase())}`;
+      
+      if (typeof module[renderFnName] === 'function') {
+        module[renderFnName](params);
+      } else if (typeof module.render === 'function') {
+        module.render(params);
+      } else {
+        console.warn(`No render function found for ${view}`);
+      }
+    } else {
+      console.error(`Route not found: ${view}`);
+      toast('Sayfa bulunamadı', 'warn');
     }
-
-    // 4. Route to Module Renderer
-    routeToRenderer(view);
+  } catch (error) {
+    console.error('Routing Error:', error);
+    toast('Sayfa yüklenirken hata oluştu', 'danger');
+  }
 }
 
-function updateNavigationUI(view) {
-    document.querySelectorAll('.nav-item').forEach(el => {
-        el.classList.toggle('active', el.getAttribute('data-view') === view);
-    });
+function updateBreadcrumbs(view) {
+  const titles = {
+    'dashboard': 'Genel Bakış',
+    'gelirler': 'Gelirler',
+    'giderler': 'Giderler',
+    'faturalar': 'Faturalar',
+    'fatura-edit': 'Fatura Tasarımcı',
+    'musteriler': 'Müşteri Yönetimi',
+    'hesaplar': 'Kasa & Bankalar',
+    'urunler': 'Ürün & Hizmetler',
+    'personeller': 'Personel Yönetimi',
+    'analiz': 'Finansal Analiz',
+    'is-takip': 'İş Takip (Kanban)',
+    'odeme-takip': 'Ödeme Takvimi',
+    'takvim': 'Etkinlik Takvimi',
+    'ayarlar': 'Sistem Ayarları'
+  };
 
-    // Handle tab visibility (General vs Analysis)
-    const isAnalysis = ['analiz', 'raporlar', 'kdv'].includes(view);
-    const mainTab = document.getElementById('tab-main');
-    const analTab = document.getElementById('tab-analiz');
-    if (mainTab) mainTab.classList.toggle('active', !isAnalysis);
-    if (analTab) analTab.classList.toggle('active', isAnalysis);
+  const crumb = document.getElementById('tb-current-crumb');
+  if (crumb) crumb.textContent = titles[view] || view;
 }
 
-function renderPageHeader(meta) {
-    const container = document.getElementById('page-header-container');
-    if (!container) return;
-
-    container.innerHTML = `
-        <div class="page-hdr">
-            <div class="page-hdr-left">
-                <h1 class="ph-title" id="ph-title">${meta.title}</h1>
-                <p class="ph-sub" id="ph-sub">${meta.sub}</p>
-            </div>
-            <div class="page-hdr-right" id="ph-actions">
-                <!-- Page specific actions will be injected by the renderer -->
-            </div>
-        </div>
-    `;
-
-    // Update breadcrumb
-    const crumb = document.getElementById('breadcrumb');
-    if (crumb) {
-        crumb.innerHTML = `<span class="tb-crumb">Finance</span> <span class="tb-sep">/</span> <span class="tb-crumb current">${meta.title}</span>`;
-    }
-}
-
-async function routeToRenderer(view) {
-    // Dynamic imports for better performance
-    try {
-        let renderer;
-        switch (view) {
-            case 'dashboard':
-                renderer = await import('../pages/dashboard.js');
-                renderer.renderDashboard();
-                break;
-            case 'gelirler':
-                renderer = await import('../pages/gelir-gider.js');
-                renderer.renderGelirler();
-                break;
-            case 'giderler':
-                renderer = await import('../pages/gelir-gider.js');
-                renderer.renderGiderler();
-                break;
-            case 'faturalar':
-                renderer = await import('../pages/faturalar.js');
-                renderer.renderFaturalar();
-                break;
-            case 'fatura-editor':
-                renderer = await import('../pages/fatura-editor.js');
-                renderer.renderFaturaEditor();
-                break;
-            case 'musteriler':
-                renderer = await import('../pages/customers.js');
-                renderer.renderMusteriler();
-                break;
-            case 'personeller':
-                renderer = await import('../pages/staff.js');
-                renderer.renderPersoneller();
-                break;
-            case 'urunler':
-                renderer = await import('../pages/products.js');
-                renderer.renderUrunler();
-                break;
-            case 'ayarlar':
-                renderer = await import('../pages/settings.js');
-                renderer.renderSettings();
-                break;
-            default:
-                console.warn(`No renderer found for view: ${view}`);
-                const pb = document.getElementById('page-body');
-                if (pb) pb.innerHTML = `<div style="padding:40px;text-align:center;color:var(--t3)">Modül henüz hazır değil: ${view}</div>`;
-        }
-    } catch (error) {
-        console.error("Navigation error:", error);
-    }
-}
+// Global expose for onclick handlers in HTML/Template strings
+window.navigate = navigate;

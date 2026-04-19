@@ -1,153 +1,153 @@
 import { S, saveStore } from '../core/state.js';
 import { TL, uid } from '../utils/formatters.js';
-import { toast, showModal, closeModal, confirmDlg } from '../components/ui.js';
-import { KDV } from '../core/constants.js';
+import { toast, showModal, closeModal } from '../components/ui.js';
 
 /**
- * Ürünler (Products/Services) Module
+ * Products (Ürünler) and Bulk Calculation Module
  */
-export function renderUrunler() {
-    const actions = document.getElementById('ph-actions');
-    if (actions) {
-        actions.innerHTML = `<button class="btn btn-orange" id="add-prod-btn">ÜRÜN/HİZMET EKLE</button>`;
-        document.getElementById('add-prod-btn')?.addEventListener('click', () => openUrunModal());
-    }
 
-    const fbar = document.getElementById('filter-bar');
-    if (fbar) {
-        fbar.style.display = 'flex';
-        fbar.innerHTML = `
-            <div style="display:flex;align-items:center;background:var(--border2);border-radius:6px;padding:0 10px">
-                <span style="font-size:10px;font-weight:700;color:var(--t3);margin-right:8px">ARAMA</span>
-                <input type="text" id="prod-search" placeholder="Kod veya isim…" style="padding:7px 0;font-size:12px;width:180px;border:none;background:transparent">
-            </div>
-            <div class="fb-grow"></div>
-            <span id="prod-count" style="font-size:11.5px;color:var(--t3);align-self:center;font-weight:600"></span>
-        `;
-        document.getElementById('prod-search').oninput = (e) => renderProductTable(e.target.value);
-    }
-
-    const pb = document.getElementById('page-body');
-    pb.innerHTML = `
-        <div class="card anim">
-            <div class="tbl-wrap">
-                <table>
-                    <thead>
-                        <tr><th>Kod</th><th>Ürün / Hizmet</th><th>Birim</th><th class="tr">Net Fiyat</th><th class="tr">KDV %</th><th class="tr">Toplam</th><th></th></tr>
-                    </thead>
-                    <tbody id="prod-tbody"></tbody>
-                </table>
-            </div>
-        </div>
+export function renderProducts() {
+  const pb = document.getElementById('page-body');
+  const actionHdr = document.getElementById('ph-actions');
+  
+  if (actionHdr) {
+    actionHdr.innerHTML = `
+      <button class="btn btn-ghost" onclick="window.navigate('toplu-hesap')">TOPLU HESAP</button>
+      <button class="btn btn-orange" onclick="window.openUrunModal()">YENİ ÜRÜN EKLE</button>
     `;
+  }
 
-    renderProductTable();
+  const urunler = S.urunler || [];
+
+  pb.innerHTML = `
+    <div class="card anim">
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Kod</th><th>Ürün / Hizmet Adı</th><th>Kategori</th><th class="tr">Birim Fiyat</th><th>Birim</th><th></th></tr>
+          </thead>
+          <tbody>
+            ${urunler.length === 0 ? `<tr><td colspan="6" class="tc" style="padding:40px;color:var(--t3)">Kayıtlı ürün bulunamadı.</td></tr>` : 
+              urunler.map(u => `
+                <tr>
+                  <td style="font-weight:700;color:var(--t3)">${u.kod}</td>
+                  <td style="font-weight:600">${u.ad}</td>
+                  <td><span class="badge bg-blue">${u.kategori}</span></td>
+                  <td class="tr mono prod-price">${TL(u.birimFiyat)}</td>
+                  <td><span class="prod-unit">${u.birim}</span></td>
+                  <td class="tr">
+                    <button class="btn btn-light btn-xs" onclick="window.openUrunModal('${u.id}')">DÜZENLE</button>
+                  </td>
+                </tr>
+              `).join('')
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
 }
 
-function renderProductTable(q = '') {
-    const tb = document.getElementById('prod-tbody');
-    if (!tb) return;
+export function renderTopluHesap() {
+  const pb = document.getElementById('page-body');
+  document.getElementById('ph-actions').innerHTML = `
+    <button class="btn btn-ghost" onclick="window.navigate('urunler')">Ürünlere Dön</button>
+  `;
 
-    let rows = S.urunler;
-    if (q) {
-        const query = q.toLowerCase();
-        rows = rows.filter(u => u.ad.toLowerCase().includes(query) || u.kod.toLowerCase().includes(query));
-    }
-
-    document.getElementById('prod-count').textContent = `${rows.length} kayıt`;
-
-    if (!rows.length) {
-        tb.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--t3)">Ürün bulunamadı</td></tr>`;
-        return;
-    }
-
-    tb.innerHTML = rows.map(u => {
-        const kdv = u.birimFiyat * u.kdvOrani / 100;
-        return `
-            <tr>
-                <td style="font-weight:700;color:var(--t2)">${u.kod}</td>
-                <td>
-                    <div style="font-weight:600">${u.ad}</div>
-                    <div style="font-size:11px;color:var(--t3)">${u.aciklama || ''}</div>
-                </td>
-                <td><span class="badge bg-light">${u.birim}</span></td>
-                <td class="tr mono">${TL(u.birimFiyat)}</td>
-                <td class="tr">%${u.kdvOrani}</td>
-                <td class="tr mono" style="font-weight:700;color:var(--blue)">${TL(u.birimFiyat + kdv)}</td>
-                <td class="tr">
-                    <button class="btn btn-light btn-xs edit-u-btn" data-id="${u.id}">Edit</button>
-                    <button class="btn btn-danger-soft btn-xs del-u-btn" data-id="${u.id}">Sil</button>
-                </td>
-            </tr>
-        `;
-    }).join('');
-
-    tb.querySelectorAll('.del-u-btn').forEach(btn => {
-        btn.onclick = () => {
-            confirmDlg('Ürünü Sil?', 'Bu öğe ürün listesinden kaldırılacaktır.', 'danger', () => {
-                const id = btn.dataset.id;
-                S.urunler = S.urunler.filter(u => u.id !== id);
-                saveStore();
-                renderProductTable();
-                toast('Ürün silindi', 'warn');
-            });
-        };
-    });
-}
-
-function openUrunModal(id) {
-    const u = id ? S.urunler.find(x => x.id === id) : null;
-    
-    showModal(`
-        <div class="modal-hdr"><div class="modal-title">Ürün/Hizmet Tanımla</div><button class="modal-close" id="u-close">×</button></div>
-        <div class="modal-body">
-            <div class="form-grid c2">
-                <div class="fg"><label>Ürün Kodu *</label><input type="text" id="u-kod" value="${u?.kod || ''}" placeholder="SRV-001"></div>
-                <div class="fg"><label>Birim</label><select id="u-birim"><option>adet</option><option>saat</option><option>paket</option></select></div>
-            </div>
-            <div class="fg" style="margin-top:12px"><label>İsim *</label><input type="text" id="u-ad" value="${u?.ad || ''}"></div>
-            <div class="form-grid c2" style="margin-top:12px">
-                <div class="fg"><label>Net Fiyat *</label><input type="number" id="u-price" value="${u?.birimFiyat || ''}"></div>
-                <div class="fg"><label>KDV %</label><select id="u-kdv">${KDV.map(r => `<option value="${r}" ${u?.kdvOrani === r ? 'selected' : ''}>%${r}</option>`).join('')}</select></div>
-            </div>
-            <div class="fg" style="margin-top:12px"><label>Açıklama</label><textarea id="u-desc" rows="2">${u?.aciklama || ''}</textarea></div>
+  pb.innerHTML = `
+    <div class="card cp anim" style="max-width:700px;margin:0 auto">
+      <div class="ct">Toplu Maliyet / Teklif Hesaplayıcı</div>
+      <div id="bulk-items" style="display:flex;flex-direction:column;gap:12px"></div>
+      <button class="btn btn-light btn-sm" style="margin-top:15px;width:100%" onclick="window.addBulkRow()">+ YENİ SATIR EKLE</button>
+      
+      <div class="hdivider"></div>
+      
+      <div class="th-total-card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:12px;color:var(--t3);font-weight:600">GENEL TOPLAM (KDV DAHİL)</div>
+            <div class="th-grand" id="bulk-total">${TL(0)}</div>
+          </div>
+          <button class="btn btn-orange" onclick="toast('Teklif PDF olarak hazırlanıyor...')">TEKLİF OLUŞTUR</button>
         </div>
-        <div class="modal-ftr">
-            <button class="btn btn-ghost" id="u-cancel">İptal</button>
-            <button class="btn btn-orange" id="u-save">Kaydet</button>
-        </div>
-    `);
-
-    document.getElementById('u-close').onclick = closeModal;
-    document.getElementById('u-cancel').onclick = closeModal;
-    
-    document.getElementById('u-save').onclick = () => {
-        const ad = document.getElementById('u-ad').value.trim();
-        const kod = document.getElementById('u-kod').value.trim();
-        const price = parseFloat(document.getElementById('u-price').value) || 0;
-
-        if (!ad || !kod || !price) { toast('Lütfen zorunlu alanları doldurun', 'warn'); return; }
-
-        const data = {
-            id: u?.id || uid(),
-            kod, ad, 
-            birimFiyat: price, 
-            kdvOrani: parseFloat(document.getElementById('u-kdv').value),
-            birim: document.getElementById('u-birim').value,
-            aciklama: document.getElementById('u-desc').value,
-            kategori: 'Genel'
-        };
-
-        if (u) {
-            const idx = S.urunler.findIndex(x => x.id === id);
-            S.urunler[idx] = data;
-        } else {
-            S.urunler.push(data);
-        }
-
-        saveStore();
-        closeModal();
-        renderUrunler();
-        toast('Ürün kaydedildi');
-    };
+      </div>
+    </div>
+  `;
+  window.addBulkRow();
 }
+
+window.addBulkRow = () => {
+  const container = document.getElementById('bulk-items');
+  if(!container) return;
+  const id = uid();
+  const row = document.createElement('div');
+  row.className = 'form-grid c3 anim-scale';
+  row.id = `row-${id}`;
+  row.innerHTML = `
+    <div class="fg"><label>Ürün</label><select onchange="window.updateBulk()"><option value="0">— Ürün Seçin —</option>${S.urunler.map(u => `<option value="${u.birimFiyat}">${u.ad}</option>`).join('')}</select></div>
+    <div class="fg"><label>Miktar</label><input type="number" value="1" oninput="window.updateBulk()"></div>
+    <div class="fg" style="position:relative"><label>İşlem</label><button class="btn btn-danger-soft" style="width:100%" onclick="document.getElementById('row-${id}').remove();window.updateBulk()">SİL</button></div>
+  `;
+  container.appendChild(row);
+  window.updateBulk();
+};
+
+window.updateBulk = () => {
+  let total = 0;
+  const rows = document.getElementById('bulk-items')?.children || [];
+  for(let row of rows) {
+    const price = parseFloat(row.querySelector('select').value) || 0;
+    const qty = parseFloat(row.querySelector('input').value) || 0;
+    total += price * qty;
+  }
+  const el = document.getElementById('bulk-total');
+  if(el) el.textContent = TL(total * 1.20); // Inc VAT
+};
+
+window.openUrunModal = (id) => {
+  const u = id ? S.urunler.find(x => x.id === id) : null;
+  showModal(`
+    <div class="modal-hdr"><div class="modal-title">Ürün / Hizmet ${u ? 'Düzenle' : 'Ekle'}</div><button class="modal-close" onclick="closeModal()">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid c2">
+         <div class="fg"><label>Ürün Kodu</label><input type="text" id="u-kod" value="${u?.kod || ''}"></div>
+         <div class="fg"><label>Kategori</label><input type="text" id="u-kat" value="${u?.kategori || ''}"></div>
+      </div>
+      <div class="fg"><label>Ürün Adı</label><input type="text" id="u-ad" value="${u?.ad || ''}"></div>
+      <div class="form-grid c2">
+         <div class="fg"><label>Birim Fiyat (₺)</label><input type="number" id="u-fiyat" value="${u?.birimFiyat || ''}"></div>
+         <div class="fg"><label>Birim</label><select id="u-birim"><option ${u?.birim === 'adet' ? 'selected' : ''}>adet</option><option ${u?.birim === 'saat' ? 'selected' : ''}>saat</option><option ${u?.birim === 'gün' ? 'selected' : ''}>gün</option></select></div>
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeModal()">İptal</button>
+      <button class="btn btn-orange" onclick="window.saveUrun('${id || ''}')">Kaydet</button>
+    </div>
+  `);
+};
+
+window.saveUrun = (id) => {
+  const ad = document.getElementById('u-ad').value;
+  if(!ad) return;
+
+  const data = {
+    id: id || uid(),
+    kod: document.getElementById('u-kod').value,
+    ad: ad,
+    kategori: document.getElementById('u-kat').value,
+    birimFiyat: parseFloat(document.getElementById('u-fiyat').value) || 0,
+    birim: document.getElementById('u-birim').value
+  };
+
+  if(id) {
+    const idx = S.urunler.findIndex(x => x.id === id);
+    S.urunler[idx] = data;
+  } else {
+    S.urunler.push(data);
+  }
+
+  saveStore();
+  closeModal();
+  renderProducts();
+  toast('Ürün kaydedildi ✓');
+};

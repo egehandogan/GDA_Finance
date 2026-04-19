@@ -1,93 +1,100 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GDA Finance</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GDA Finance | Kurumsal Finans Yönetimi</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/src/css/main.css">
 </head>
 <body>
-    <div id="app">
-        <!-- Sidebar Navigation -->
-        <nav id="sb-nav">
-            <div class="sn-head">
-                <div style="display:flex;align-items:center;gap:8px">
-                    <div class="sl-logo" style="width:24px;height:24px;border-radius:6px;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">GF</div>
-                    <span class="sn-title">GDA Finance</span>
-                </div>
-                <button class="sn-collapse" id="nav-toggle-btn" title="Daralt/Genişlet">‹</button>
-            </div>
-            <div class="sn-tabs">
-                <button class="sn-tab active" id="tab-main">Ana</button>
-                <button class="sn-tab" id="tab-analiz">Analiz</button>
-            </div>
-
-            <div id="nav-content">
-                <!-- Navigation items will be rendered here by router.js/sidebar.js -->
-            </div>
-
-            <div class="sn-footer">
-                <div class="sn-company" id="profile-trigger">
-                    <div class="sn-av">G</div>
-                    <div class="sn-info">
-                        <div style="font-size:12px;font-weight:600;color:var(--t1)">GDA Kurumsal</div>
-                        <div style="font-size:10.5px;color:var(--t3)">Admin Paneli</div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Profile Popover -->
-        <div class="profile-popover" id="profile-popover">
-            <div class="pp-item" id="pp-support">
-                <span class="pp-icon">🎧</span> Destek Talebi
-            </div>
-            <div class="pp-item" id="pp-admin">
-                <span class="pp-icon">⚙️</span> Admin Ata
-            </div>
-            <div class="pp-sep"></div>
-            <div class="pp-item danger" id="pp-logout">
-                <span class="pp-icon">🚪</span> Çıkış Yap
-            </div>
+  <div id="app">
+    <!-- Navigation Panel -->
+    <nav id="sb-nav">
+      <div class="sn-head">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="sl-logo" style="width:24px;height:24px;border-radius:6px;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">GF</div>
+          <span class="sn-title">GDA Finance</span>
         </div>
+        <button class="sn-collapse" title="Daralt/Genişlet" onclick="toggleNav()">‹</button>
+      </div>
+      
+      <div class="sn-tabs">
+        <button class="sn-tab active" id="tab-main" onclick="switchTab('main')">Ana</button>
+        <button class="sn-tab" id="tab-analiz" onclick="switchTab('analiz')">Analiz</button>
+      </div>
 
-        <!-- Main Content Area -->
-        <main id="content">
-            <header class="topbar">
-                <div class="tb-nav">
-                    <button class="tb-arrow" id="tb-back">‹</button>
-                    <span class="tb-sep">/</span>
-                    <div id="breadcrumb" style="display:flex;gap:4px;align-items:center">
-                        <span class="tb-crumb">Finance</span>
-                    </div>
-                </div>
-                <div class="tb-right">
-                    <button class="tb-icon-btn" title="Bildirimler">🔔</button>
-                    <div class="tb-avatar">E</div>
-                </div>
-            </header>
+      <div id="nav-content">
+        <!-- Sidebar items rendered dynamically -->
+      </div>
 
-            <div id="page-header-container">
-                <!-- Page header will be injected here -->
-            </div>
-            
-            <div id="filter-bar-container">
-                <!-- Filter bar will be injected here -->
-            </div>
+      <div class="sn-footer">
+        <div class="sn-company" id="profile-trigger">
+          <div class="sn-av">G</div>
+          <div class="sn-info">
+            <div style="font-size:12px;font-weight:600;color:var(--t1)">GDA Kurumsal</div>
+            <div style="font-size:10.5px;color:var(--t3)">Admin Paneli</div>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-            <div class="page-body" id="page-body">
-                <!-- Page content will be injected here -->
-                <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--t3)">
-                    Yükleniyor...
-                </div>
-            </div>
-        </main>
+    <!-- Content Area -->
+    <main id="content">
+      <header class="topbar no-print">
+        <div class="tb-nav">
+          <button class="tb-arrow">‹</button>
+          <span class="tb-sep">/</span>
+          <span class="tb-crumb">Finance</span>
+          <span class="tb-sep">/</span>
+          <span class="tb-crumb current" id="tb-current-crumb">Genel Bakış</span>
+        </div>
+        <div class="tb-right">
+          <button class="tb-icon-btn">🔔</button>
+          <div class="tb-avatar">A</div>
+        </div>
+      </header>
+
+      <!-- Page Header -->
+      <div class="page-hdr anim-fade" id="page-hdr">
+        <div class="page-hdr-left">
+          <h1 class="ph-title" id="ph-title">Finansal Özet</h1>
+          <div class="ph-sub" id="ph-sub">Şirketinizin güncel finansal durumunu takip edin.</div>
+        </div>
+        <div class="page-hdr-right" id="ph-actions">
+          <!-- Action buttons injected here -->
+        </div>
+      </div>
+
+      <!-- Filter Bar / Dynamic Controls -->
+      <div class="filter-bar no-print" id="filter-bar" style="display:none"></div>
+
+      <!-- Main Body -->
+      <div class="page-body" id="page-body">
+         <!-- Content injected here -->
+      </div>
+    </main>
+
+    <!-- Profile Popover -->
+    <div class="profile-popover" id="profile-popover">
+      <div class="pp-item"><span>🎧</span> Destek Talebi</div>
+      <div class="pp-item"><span>⚙️</span> Ayarlar</div>
+      <div class="pp-sep"></div>
+      <div class="pp-item danger" onclick="logout()"><span>🚪</span> Çıkış Yap</div>
     </div>
+  </div>
 
-    <div id="modal-container"></div>
-    <div id="toast"></div>
+  <!-- Overlay Containers -->
+  <div id="modal-container"></div>
+  <div id="toast"></div>
 
-    <script type="module" src="/src/main.js"></script>
+  <!-- Entry Point -->
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html>

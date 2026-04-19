@@ -2,139 +2,108 @@ import { S, saveStore } from '../core/state.js';
 import { toast } from '../components/ui.js';
 
 /**
- * Ayarlar (Settings) Module
+ * Settings (Ayarlar) Module
+ * Handles Company info, Module toggles, and Drive integration settings.
  */
+
 export function renderSettings() {
-    const actions = document.getElementById('ph-actions');
-    if (actions) actions.innerHTML = '';
+  const pb = document.getElementById('page-body');
+  document.getElementById('ph-actions').innerHTML = `
+    <button class="btn btn-orange" onclick="window.saveSettings()">AYARLARI KAYDET</button>
+  `;
 
-    const fbar = document.getElementById('filter-bar');
-    if (fbar) fbar.style.display = 'none';
+  const s = S.settings;
 
-    const pb = document.getElementById('page-body');
-    pb.innerHTML = `
-        <div class="stabs anim">
-            <button class="stab active" data-tab="company">Şirket Bilgileri</button>
-            <button class="stab" data-tab="tax">Vergi Ayarları</button>
-            <button class="stab" data-tab="channels">Satış Kanalları</button>
-            <button class="stab" data-tab="drive">Google Drive</button>
-        </div>
-        <div id="settings-tab-content"></div>
-    `;
+  pb.innerHTML = `
+    <div class="stabs anim">
+      <button class="stab active" id="stab-genel" onclick="window.switchSettTab('genel')">Genel</button>
+      <button class="stab" id="stab-modul" onclick="window.switchSettTab('modul')">Modüller</button>
+      <button class="stab" id="stab-drive" onclick="window.switchSettTab('drive')">Google Drive</button>
+    </div>
 
-    const tabs = pb.querySelectorAll('.stab');
-    tabs.forEach(tab => {
-        tab.onclick = () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            renderTab(tab.dataset.tab);
-        };
-    });
+    <div id="settings-content" class="anim d1">
+       <!-- Dynamic Content -->
+    </div>
+  `;
 
-    renderTab('company');
+  window.switchSettTab('genel');
 }
 
-function renderTab(tab) {
-    const container = document.getElementById('settings-tab-content');
-    if (tab === 'company') container.innerHTML = buildCompanyTab();
-    else if (tab === 'tax') container.innerHTML = buildTaxTab();
-    else if (tab === 'channels') container.innerHTML = buildChannelsTab();
-    else if (tab === 'drive') container.innerHTML = buildDriveTab();
-    
-    // Re-bind events for the current tab
-    bindTabEvents(tab);
-}
+window.switchSettTab = (tab) => {
+  const container = document.getElementById('settings-content');
+  if(!container) return;
 
-function buildCompanyTab() {
+  document.querySelectorAll('.stab').forEach(el => el.classList.toggle('active', el.id === `stab-${tab}`));
+
+  if(tab === 'genel') {
     const s = S.settings.sirket;
-    return `
-        <div class="settings-card anim">
-            <div style="display:grid; grid-template-columns: 1fr 2fr; gap:30px">
-                <div>
-                    <div class="settings-section">Şirket Logosu</div>
-                    <div class="logo-drop" id="logo-drop-zone" style="height:150px; cursor:pointer; border:2px dashed var(--border); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center">
-                        ${s.logo ? `<img src="${s.logo}" style="max-height:100px; max-width:80%">` : `<span style="font-size:12px; color:var(--t3)">Logo Yükle</span>`}
-                    </div>
-                    <input type="file" id="logo-in" accept="image/*" style="display:none">
-                </div>
-                <div>
-                    <div class="settings-section">Resmi Bilgiler</div>
-                    <div class="fg" style="margin-bottom:12px"><label>Şirket Ünvanı</label><input type="text" id="s-name" value="${s.ad}"></div>
-                    <div class="form-grid c2">
-                        <div class="fg"><label>VKN / TC</label><input type="text" id="s-vkn" value="${s.vkn}"></div>
-                        <div class="fg"><label>Vergi Dairesi</label><input type="text" id="s-vd" value="${s.vergiDairesi}"></div>
-                    </div>
-                    <div class="fg" style="margin-top:12px"><label>IBAN</label><input type="text" id="s-iban" value="${s.iban}"></div>
-                    <div class="fg" style="margin-top:12px"><label>Adres</label><textarea id="s-addr" rows="2">${s.adres}</textarea></div>
-                    <div style="margin-top:20px; text-align:right">
-                        <button class="btn btn-blue" id="save-sirket-btn">Değişiklikleri Kaydet</button>
-                    </div>
-                </div>
-            </div>
+    container.innerHTML = `
+      <div class="settings-card">
+        <div class="settings-section">ŞİRKET BİLGİLERİ</div>
+        <div class="fg"><label>Şirket Resmi Ünvanı</label><input type="text" id="s-ad" value="${s.ad || ''}"></div>
+        <div class="form-grid c3" style="margin-top:12px">
+           <div class="fg"><label>VKN / TCKN</label><input type="text" id="s-vkn" value="${s.vkn || ''}"></div>
+           <div class="fg"><label>Vergi Dairesi</label><input type="text" id="s-vd" value="${s.vergiDairesi || ''}"></div>
+           <div class="fg"><label>E-posta</label><input type="text" id="s-email" value="${s.email || ''}"></div>
         </div>
+        <div class="fg" style="margin-top:12px"><label>İş Adresi</label><textarea id="s-adres">${s.adres || ''}</textarea></div>
+        <div class="fg" style="margin-top:12px"><label>IBAN Adresi</label><input type="text" id="s-iban" value="${s.iban || ''}"></div>
+      </div>
     `;
-}
-
-function buildTaxTab() {
-    const v = S.settings.vergi;
-    return `
-        <div class="settings-card anim" style="max-width:600px">
-            <div class="settings-section">Varsayılan KDV Oranı</div>
-            <div style="display:flex; gap:10px; margin-bottom:30px">
-                ${[0, 1, 10, 20].map(r => `
-                    <label style="flex:1; padding:15px; border:1px solid ${v.varsayilanKdv === r ? 'var(--blue)' : 'var(--border)'}; border-radius:12px; cursor:pointer; background:${v.varsayilanKdv === r ? 'var(--blue-50)' : 'transparent'}; text-align:center">
-                        <input type="radio" name="kdv-def" value="${r}" ${v.varsayilanKdv === r ? 'checked' : ''} style="display:none">
-                        <span style="font-weight:700; color:${v.varsayilanKdv === r ? 'var(--blue)' : 'var(--t2)'}">%${r}</span>
-                    </label>
-                `).join('')}
+  } else if(tab === 'modul') {
+    const m = S.settings.moduller;
+    container.innerHTML = `
+      <div class="settings-card">
+        <div class="settings-section">AKTİF MODÜLLER</div>
+        <p style="font-size:12px;color:var(--t3);margin-bottom:15px">Kullanmadığınız modülleri kapatarak arayüzü sadeleştirebilirsiniz.</p>
+        
+        ${Object.keys(m).map(key => `
+          <div class="toggle-row">
+            <div>
+              <div class="toggle-label">${key.toUpperCase()}</div>
+              <div class="toggle-sub">Bu modülü yan menüde göster</div>
             </div>
-            <div class="settings-section">E-Fatura Ayarları</div>
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0">
-                <div>
-                    <div style="font-weight:600">E-Arşiv / E-Fatura Kullanımı</div>
-                    <div style="font-size:12px; color:var(--t3)">Faturalar otomatik olarak e-belge formatında hazırlanır.</div>
-                </div>
-                <label class="toggle"><input type="checkbox" ${v.earsiv ? 'checked' : ''}><span class="toggle-slider"></span></label>
-            </div>
+            <div class="toggle"><input type="checkbox" id="m-${key}" ${m[key] ? 'checked' : ''}><span class="toggle-slider"></span></div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  } else if(tab === 'drive') {
+    const d = S.settings.depolama;
+    container.innerHTML = `
+      <div class="settings-card">
+        <div class="settings-section">GOOGLE DRIVE ENTEGRASYONU</div>
+        <div class="drive-chip ${d.aktif ? 'on' : 'off'}">
+          ${d.aktif ? '✓ Drive Bağlı' : '○ Drive Bağlı Değil'}
         </div>
+        <div class="fg" style="margin-top:15px"><label>Folder URL</label><input type="text" id="d-url" value="${d.driveFolderUrl || ''}" placeholder="https://drive.google.com/..."></div>
+        <div class="fg" style="margin-top:12px"><label>API Key</label><input type="password" id="d-key" value="${d.driveApiKey || ''}"></div>
+      </div>
     `;
-}
+  }
+};
 
-function buildChannelsTab() {
-    return `<div style="padding:40px; text-align:center; color:var(--t3)">Satış kanalları yönetimi yakında...</div>`;
-}
+window.saveSettings = () => {
+  // Update S.settings based on inputs (Genel Tab)
+  if(document.getElementById('s-ad')) {
+    S.settings.sirket.ad = document.getElementById('s-ad').value;
+    S.settings.sirket.vkn = document.getElementById('s-vkn').value;
+    S.settings.sirket.vergiDairesi = document.getElementById('s-vd').value;
+    S.settings.sirket.email = document.getElementById('s-email').value;
+    S.settings.sirket.adres = document.getElementById('s-adres').value;
+    S.settings.sirket.iban = document.getElementById('s-iban').value;
+  }
+  
+  // Update Modules (if visible)
+  if(document.getElementById('m-dashboard')) {
+    Object.keys(S.settings.moduller).forEach(key => {
+      const el = document.getElementById(`m-${key}`);
+      if(el) S.settings.moduller[key] = el.checked;
+    });
+  }
 
-function buildDriveTab() {
-    return `<div style="padding:40px; text-align:center; color:var(--t3)">Google Drive entegrasyon ayarları yakında...</div>`;
-}
-
-function bindTabEvents(tab) {
-    if (tab === 'company') {
-        document.getElementById('save-sirket-btn').onclick = () => {
-            const s = S.settings.sirket;
-            s.ad = document.getElementById('s-name').value;
-            s.vkn = document.getElementById('s-vkn').value;
-            s.vergiDairesi = document.getElementById('s-vd').value;
-            s.iban = document.getElementById('s-iban').value;
-            s.adres = document.getElementById('s-addr').value;
-            saveStore();
-            toast('Şirket bilgileri güncellendi', 'ok');
-        };
-
-        const drop = document.getElementById('logo-drop-zone');
-        const input = document.getElementById('logo-in');
-        drop.onclick = () => input.click();
-        input.onchange = (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                S.settings.sirket.logo = ev.target.result;
-                saveStore();
-                renderTab('company');
-                toast('Logo güncellendi');
-            };
-            reader.readAsDataURL(file);
-        };
-    }
-}
+  saveStore();
+  toast('Ayarlar kaydedildi ✓');
+  // Refresh sidebar to reflect module changes if integrated
+  if(window.updateSidebarModules) window.updateSidebarModules();
+};

@@ -1,116 +1,114 @@
-import './css/main.css';
-import { loadStore, S } from './js/core/state.js';
+import { S, loadStore } from './js/core/state.js';
 import { navigate } from './js/core/router.js';
-import { checkAuth } from './js/core/auth.js';
-import { openSupportModal, openSetAdminModal, handleLogout } from './js/components/profile-actions.js';
-
 
 /**
- * GDA Finance - Main Application Entry
+ * GDA Finance Main Entry Point
+ * Initializing application state and global UI handlers.
  */
+
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Load Data
-    loadStore();
-
-    // 2. Auth Check
-    if (!checkAuth()) return;
-
-    // 3. Initial UI Setup
     initApp();
-
-    navigate(S.view || 'dashboard');
 });
 
-
 function initApp() {
-    // Sidebar Toggle
-    const toggleBtn = document.getElementById('nav-toggle-btn');
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-            document.getElementById('sb-nav').classList.toggle('collapsed');
-        });
-    }
+    // 1. Load Local State
+    loadStore();
 
-    // Profile Popover
-    const profileTrigger = document.getElementById('profile-trigger');
-    const popover = document.getElementById('profile-popover');
+    // 2. Global UI Handlers
+    window.toggleNav = () => {
+        const nav = document.getElementById('sb-nav');
+        nav.classList.toggle('collapsed');
+    };
+
+    window.switchTab = (tab) => {
+        document.querySelectorAll('.sn-tab').forEach(t => t.classList.toggle('active', t.id === `tab-${tab}`));
+        updateSidebarModules();
+    };
+
+    window.toggleProfileMenu = () => {
+        const popover = document.getElementById('profile-popover');
+        popover.classList.toggle('active');
+    };
+
+    window.logout = () => {
+        S.isLoggedIn = false;
+        S.user = null;
+        localStorage.clear();
+        window.location.reload();
+    };
+
+    // Global click listener for popover closing
+    document.addEventListener('click', (e) => {
+        const trigger = document.getElementById('profile-trigger');
+        const popover = document.getElementById('profile-popover');
+        if (popover && trigger && !popover.contains(e.target) && !trigger.contains(e.target)) {
+            popover.classList.remove('active');
+        }
+    });
+
+    // 3. Initialize Sidebar & Modules
+    updateSidebarModules();
+
+    // 4. Initial Navigation
+    // If logged in, go to dashboard or previous view, else go to login (handled in router)
+    navigate(S.view || 'dashboard');
     
-    if (profileTrigger && popover) {
-        profileTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            popover.classList.toggle('active');
-        });
-        
-        document.addEventListener('click', (e) => {
-            if (!popover.contains(e.target) && !profileTrigger.contains(e.target)) {
-                popover.classList.remove('active');
-            }
-        });
-
-        // Popover Item Actions
-        document.getElementById('pp-support')?.addEventListener('click', () => {
-            popover.classList.remove('active');
-            openSupportModal();
-        });
-        document.getElementById('pp-admin')?.addEventListener('click', () => {
-            popover.classList.remove('active');
-            openSetAdminModal();
-        });
-        document.getElementById('pp-logout')?.addEventListener('click', () => {
-            popover.classList.remove('active');
-            handleLogout();
-        });
-    }
-
-
-    // Dynamic Navigation Menu Rendering
-    renderSidebarMenu();
+    // 5. Profile trigger listener
+    const trigger = document.getElementById('profile-trigger');
+    if (trigger) trigger.onclick = window.toggleProfileMenu;
 }
 
-function renderSidebarMenu() {
+/**
+ * Renders Sidebar Nav items based on active modules in settings
+ */
+export function updateSidebarModules() {
     const navContent = document.getElementById('nav-content');
     if (!navContent) return;
 
-    // This logic mimics the original v8 dynamic sidebar
-    // We can expand this with more SVGs and modules
-    navContent.innerHTML = `
-        <div class="sec-label">Genel</div>
-        <a class="nav-item" data-view="dashboard">
-            <span class="nav-icon">📊</span>
-            <span class="nav-text">Dashboard</span>
-        </a>
+    const mod = S.settings.moduller;
+    const isAnaliz = document.getElementById('tab-analiz').classList.contains('active');
+
+    let html = '';
+
+    if (!isAnaliz) {
+        html += `<div class="sec-label">TEMEL MODÜLLER</div>`;
+        if (mod.dashboard) html += createNavItem('dashboard', '🏠', 'Genel Bakış');
+        if (mod.gelirler) html += createNavItem('gelirler', '💰', 'Gelirler');
+        if (mod.giderler) html += createNavItem('giderler', '💸', 'Giderler');
+        if (mod.faturalar) html += createNavItem('faturalar', '🧾', 'Faturalar', S.faturalar.filter(f => f.durum !== 'odendi').length);
         
-        <div class="sec-label">Mali İşlemler</div>
-        <a class="nav-item" data-view="gelirler">
-            <span class="nav-icon">📈</span>
-            <span class="nav-text">Gelirler</span>
-        </a>
-        <a class="nav-item" data-view="giderler">
-            <span class="nav-icon">📉</span>
-            <span class="nav-text">Giderler</span>
-        </a>
-        <a class="nav-item" data-view="faturalar">
-            <span class="nav-icon">📄</span>
-            <span class="nav-text">Faturalar</span>
-        </a>
-        
-        <div class="sec-label">Kayıtlar</div>
-        <a class="nav-item" data-view="musteriler">
-            <span class="nav-icon">👥</span>
-            <span class="nav-text">Müşteriler</span>
-        </a>
-        <a class="nav-item" data-view="personeller">
-            <span class="nav-icon">👔</span>
-            <span class="nav-text">Personeller</span>
+        html += `<div class="sec-label">YÖNETİM</div>`;
+        if (mod.musteriler) html += createNavItem('musteriler', '👥', 'Müşteriler');
+        if (mod.urunler) html += createNavItem('urunler', '📦', 'Ürün / Hizmet');
+        if (mod.personeller) html += createNavItem('personeller', '👔', 'Personel / İK');
+        if (mod.hesaplar) html += createNavItem('hesaplar', '🏦', 'Kasa & Banka');
+
+        html += `<div class="sec-label">TAKİP & ARAÇLAR</div>`;
+        if (mod['is-takip']) html += createNavItem('is-takip', '📋', 'İş Takip');
+        if (mod['odeme-takip']) html += createNavItem('odeme-takip', '📅', 'Ödeme Takibi');
+        if (mod.takvim) html += createNavItem('takvim', '🗓', 'Takvim');
+    } else {
+        html += `<div class="sec-label">ANALİZ & RAPORLAR</div>`;
+        if (mod.analiz) html += createNavItem('analiz', '📊', 'Finansal Analiz');
+        if (mod.raporlar) html += createNavItem('raporlar', '📈', 'Detaylı Raporlar');
+        if (mod.kdv) html += createNavItem('kdv', '🏛', 'KDV Analizi');
+    }
+
+    html += `<div class="sec-label" style="margin-top:auto">SİSTEM</div>`;
+    html += createNavItem('ayarlar', '⚙️', 'Ayarlar');
+
+    navContent.innerHTML = html;
+}
+
+function createNavItem(view, emoji, text, badge = 0) {
+    const isActive = S.view === view;
+    return `
+        <a class="nav-item ${isActive ? 'active' : ''}" data-view="${view}" onclick="navigate('${view}')">
+            <span class="nav-icon">${emoji}</span>
+            <span class="nav-text">${text}</span>
+            ${badge > 0 ? `<span class="nav-badge">${badge}</span>` : ''}
         </a>
     `;
-
-    // Add click events to nav items
-    navContent.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const view = item.getAttribute('data-view');
-            navigate(view);
-        });
-    });
 }
+
+window.updateSidebarModules = updateSidebarModules;
