@@ -25,8 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         entry.target.classList.add('visible');
-        // Optional: Stop observing once faded in to avoid re-triggering
-        // observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
@@ -37,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Pricing Toggle Logic
   const billingSwitch = document.getElementById('billingSwitch');
   const amounts = document.querySelectorAll('.amount');
-  const periods = document.querySelectorAll('.period');
 
   if (billingSwitch) {
     billingSwitch.addEventListener('change', (e) => {
@@ -53,55 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
           el.style.opacity = 1;
         }, 300);
       });
-
-      // Update periods globally (optional: or leave as /aylık and simply refer to yearly cost billed monthly)
-      // Usually yearly plans show the "Equivalent monthly price".
-      // Let's just keep the label as /aylık but show the discounted rate.
-      // E.g. $17/mo -> $13/mo (Billed Annually)
     });
   }
-
-  // Smooth scroll offset for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
-      if(targetId === '#') return;
-      const targetElement = document.querySelector(targetId);
-      
-      if (targetElement) {
-        const navHeight = navbar.offsetHeight;
-        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight;
-        
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-
-        // Update active class on nav links
-        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-        this.classList.add('active');
-      }
-    });
-  });
-
-  // Track scroll position to update active navbar link automatically
-  const sections = document.querySelectorAll('section');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      if (pageYOffset >= (sectionTop - navbar.offsetHeight - 50)) {
-        current = section.getAttribute('id');
-      }
-    });
-
-    document.querySelectorAll('.nav-links a').forEach(li => {
-      li.classList.remove('active');
-      if (li.getAttribute('href') === `#${current}`) {
-        li.classList.add('active');
-      }
-    });
-  });
 });

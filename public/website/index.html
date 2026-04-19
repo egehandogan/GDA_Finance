@@ -23,16 +23,15 @@
   <!-- NAVBAR -->
   <nav id="navbar" class="glass-nav">
     <div class="nav-container">
-      <a href="#home" class="logo">Findie</a>
+      <a href="index.html" class="logo">Findie</a>
       <div class="nav-links">
-        <a href="#home" class="active">Ana Sayfa</a>
-        <a href="#product">Findie Nedir?</a>
-        <a href="#compare">Karşılaştırma</a>
-        <a href="#pricing">Fiyatlandırma</a>
+        <a href="index.html" class="active">Ana Sayfa</a>
+        <a href="product.html">Findie Nedir?</a>
+        <a href="compare.html">Karşılaştırma</a>
+        <a href="pricing.html">Fiyatlandırma</a>
       </div>
       <div class="nav-actions">
-        <!-- Login link returns to the root where the Findie application lives -->
-        <a href="/" class="btn-demo">Demo Deneyin</a>
+        <a href="/" class="btn-demo">Uygulamaya Git</a>
       </div>
     </div>
   </nav>
@@ -48,7 +47,7 @@
         </p>
         <div class="hero-buttons fade-up" data-delay="300">
           <a href="/" class="btn-primary">Hemen Başlayın</a>
-          <a href="#product" class="btn-secondary">Özellikleri Keşfet ↓</a>
+          <a href="product.html" class="btn-secondary">Özellikleri Keşfet &rarr;</a>
         </div>
         
         <div class="hero-mockup fade-up" data-delay="400">
@@ -57,17 +56,22 @@
               <span class="dot d-r"></span><span class="dot d-y"></span><span class="dot d-g"></span>
             </div>
             <div class="mw-body">
+              <!-- Using original generic screenshot or a light-themed generic SaaS dashboard -->
               <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Findie Dashboard Mockup" class="mockup-img">
               <div class="mockup-overlay">
                 <div class="m-card float-anim" style="top:20%;left:-40px;">
-                  <div class="m-icon">⚡</div>
+                  <div class="m-icon">
+                     <svg class="inline-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                  </div>
                   <div>
                     <div class="m-title">AI Pitch Hazırlandı</div>
                     <div class="m-sub">Sunum oluşturuldu</div>
                   </div>
                 </div>
                 <div class="m-card float-anim-rev" style="bottom:20%;right:-40px;">
-                  <div class="m-icon">📈</div>
+                  <div class="m-icon">
+                    <svg class="inline-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                  </div>
                   <div>
                     <div class="m-title">Gelir Artışı</div>
                     <div class="m-sub">%42 geçen aya göre</div>
@@ -79,219 +83,31 @@
         </div>
       </div>
     </section>
-
-    <!-- PRODUCT SECTION -->
-    <section id="product" class="section-product pt-120">
-      <div class="container">
-        <div class="section-head text-center fade-in">
-          <h2 class="sec-title">Geleceği <span class="text-gradient">Bugün</span> Yaşayın</h2>
-          <p class="sec-desc">Sıradan muhasebe yazılımlarını unutun. Findie, ekibinizi hızlandıran interaktif ve zeki bir çalışma masası sunar.</p>
-        </div>
-
-        <div class="feature-grid">
-          <div class="feat-card fade-up" data-delay="0">
-            <div class="fc-icon">🚀</div>
-            <h3>Yapay Zeka Yatırımcı Sunumu</h3>
-            <p>Finansal verilerinizi analiz eden AI Pitch motorumuz, şirketinizin performansını analiz ederek tek bir tıkla size profesyonel bir yatırımcı raporu sunar.</p>
-          </div>
-          <div class="feat-card fade-up" data-delay="100">
-            <div class="fc-icon">📸</div>
-            <h3>Dahili Hızlı OCR (Ücretsiz)</h3>
-            <p>Gider belgelerinizi sisteme yükleyin, Findie saniyeler içinde KDV ve tutar gibi verileri yapay zeka ile okur ve formunuza otomatik aktarır. Ekstre taramak hiç bu kadar kolay olmamıştı.</p>
-          </div>
-          <div class="feat-card fade-up" data-delay="200">
-            <div class="fc-icon">🧩</div>
-            <h3>Özelleştirilebilir Dashboard</h3>
-            <p>Standart ekranlara sıkışmayın. Kendi ekranınızı widget ekosistemi üzerinden "Aç-Kapat" yöntemleriyle tam kişiselleştirin ve yalnızca görmek istediğiniz KPI'ları takip edin.</p>
-          </div>
-        </div>
-
-        <div class="interactive-showcase mt-100 fade-in">
-          <div class="showcase-content">
-            <h3 class="sh-title">Verilerinize Hayat Verin</h3>
-            <p class="sh-desc">Klişe ve sıkıcı rapor tablolarından sıkıldınız mı? Findie'nin zengin arayüzü sayesinde her dokunuşta interaktif geri bildirimler alın ve raporları anlamlı analizlere dönüştürün.</p>
-            <ul class="sh-list">
-              <li><svg class="icon-chk" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Gerçek zamanlı grafik render</li>
-              <li><svg class="icon-chk" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Detaylı Müşteri Davranış Analizi</li>
-              <li><svg class="icon-chk" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Excel & PDF Rapor Export İmkanı</li>
-            </ul>
-          </div>
-          <div class="showcase-visual">
-             <img src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?q=80&w=2070&auto=format&fit=crop" class="glass-img" alt="Analysis Mockup">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMPARE SECTION -->
-    <section id="compare" class="section-compare pt-120">
-      <div class="container">
-        <div class="section-head text-center fade-in">
-          <h2 class="sec-title">Pazar Lideri Nasıl Olunur?</h2>
-          <p class="sec-desc">Sektördeki en iyi muhasebe uygulamalarıyla Findie'nin teknolojik sınırlarını tarafsızca karşılaştırdık.</p>
-        </div>
-
-        <div class="table-wrapper fade-up">
-          <table class="compare-table">
-            <thead>
-              <tr>
-                <th>Özellikler</th>
-                <th class="brand-col">Findie</th>
-                <th>Paraşüt</th>
-                <th>Logo İşbaşı</th>
-                <th>KolayBi</th>
-                <th>Bizim Hesap</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>AI Pitch (Yapay Zeka Sunumu)</strong></td>
-                <td class="brand-val success">VAR (Ücretsiz)</td>
-                <td class="val-cross">Yok</td>
-                <td class="val-cross">Yok</td>
-                <td class="val-cross">Yok</td>
-                <td class="val-cross">Yok</td>
-              </tr>
-              <tr>
-                <td><strong>Akıllı Fiş Tarama (OCR)</strong></td>
-                <td class="brand-val success">Dahili %99 Başarı</td>
-                <td class="val-warn">Paket İçi Müşteri Başı</td>
-                <td class="val-warn">Paket Sınırlı</td>
-                <td class="val-cross">Yok / Ek Ücretli</td>
-                <td class="val-warn">Kısmi Okuma</td>
-              </tr>
-              <tr>
-                <td><strong>Dinamik Dashboard (Kişiselleştirilebilir)</strong></td>
-                <td class="brand-val success">12+ Modüler Widget</td>
-                <td class="val-warn">Sınırlı</td>
-                <td class="val-cross">Statik</td>
-                <td class="val-cross">Statik</td>
-                <td class="val-cross">Statik</td>
-              </tr>
-              <tr>
-                <td><strong>Akıllı Bildirim / Alarm Sistemi</strong></td>
-                <td class="brand-val success">Aktif Uyarılar</td>
-                <td class="val-warn">Sınırlı (Manuel)</td>
-                <td class="val-cross">Yok</td>
-                <td class="val-warn">E-Posta Bazlı</td>
-                <td class="val-cross">Yok</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRICING SECTION -->
-    <section id="pricing" class="section-pricing pt-120">
-      <div class="container">
-        <div class="section-head text-center fade-in">
-          <h2 class="sec-title">Şeffaf <span class="text-gradient">Fiyatlandırma</span></h2>
-          <p class="sec-desc">Ekibinizin ve işletmenizin büyüklüğüne en uygun paketi hiçbir sürpriz limit olmadan seçin.</p>
-          
-          <div class="billing-toggle mt-40">
-            <span class="bt-label">Aylık</span>
-            <label class="switch">
-              <input type="checkbox" id="billingSwitch">
-              <span class="slider round"></span>
-            </label>
-            <span class="bt-label">Yıllık <span class="discount-badge">%20 İndirim</span></span>
-          </div>
-        </div>
-
-        <div class="pricing-grid mt-40">
-          
-          <!-- Free / Demo -->
-          <div class="price-card fade-up" data-delay="0">
-            <div class="pc-head">
-              <h3>Demo Vakti</h3>
-              <p>Temel araçları denemeniz için.</p>
-            </div>
-            <div class="pc-price">
-              <span class="currency">$</span>
-              <span class="amount" data-monthly="0" data-yearly="0">0</span>
-              <span class="period">/aylık</span>
-            </div>
-            <ul class="pc-features">
-              <li>1 Aylık Kullanım Şansı</li>
-              <li>Tüm Temel Gelir/Gider Modülleri</li>
-              <li class="disabled">AI Pitch Erişimi Yok</li>
-              <li class="disabled">Excel Dışa Aktarma Yok</li>
-            </ul>
-            <a href="/" class="btn-outline-block">Platformu Gez</a>
-          </div>
-
-          <!-- Indie Pack (Most Popular) -->
-          <div class="price-card popular fade-up" data-delay="100">
-            <div class="popular-badge">En Çok Tercih Edilen</div>
-            <div class="pc-head">
-              <h3>Indie Pack</h3>
-              <p>Büyüyen startup ve KOBİ'ler için.</p>
-            </div>
-            <div class="pc-price">
-              <span class="currency">$</span>
-              <span class="amount" data-monthly="17" data-yearly="13">17</span>
-              <span class="period" id="per1">/aylık</span>
-            </div>
-            <ul class="pc-features">
-              <li>Maksimum 10 Kullanıcı Hesabı</li>
-              <li>AI Pitch Yapay Zeka Desteği</li>
-              <li>Aylık Takvim Entegrasyonu</li>
-              <li>KDV ve Müşteri Analizleri</li>
-              <li class="disabled">Excel Dışa Aktarma (Kapalı)</li>
-            </ul>
-            <a href="/" class="btn-primary-block">Hemen Başla</a>
-          </div>
-
-          <!-- Enterprise -->
-          <div class="price-card fade-up" data-delay="200">
-            <div class="pc-head">
-              <h3>Enterprise</h3>
-              <p>Tüm limite sahip dev operasyonlar için.</p>
-            </div>
-            <div class="pc-price">
-              <span class="currency">$</span>
-              <span class="amount" data-monthly="49" data-yearly="39">49</span>
-              <span class="period" id="per2">/aylık</span>
-            </div>
-            <ul class="pc-features">
-              <li>Limitsiz Kullanıcı Hesabı (Sınırsız)</li>
-              <li>Tüm Yapay Zeka Fonksiyonları</li>
-              <li>Excel/PDF Tam Yönetim İzni</li>
-              <li>Özelleştirilebilir 12+ Dashboard Widget</li>
-              <li>Öncelikli Destek Servisi</li>
-            </ul>
-            <a href="/" class="btn-outline-block">Limitsiz Keşfet</a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="site-footer">
-      <div class="container footer-cont">
-        <div class="f-brand">
-          <div style="font-size: 24px; font-weight:800; font-family:'Outfit', sans-serif;">Findie.</div>
-          <p>Yeni nesil işletmeler için modern, akıllı, limitsiz kurumsal finans yönetim platformu. 2026</p>
-        </div>
-        <div class="f-links">
-          <h4>Çözümler</h4>
-          <a href="#">Ön Muhasebe</a>
-          <a href="#">e-Fatura</a>
-          <a href="#">Stok Yönetimi</a>
-          <a href="#">Mali Analiz</a>
-        </div>
-        <div class="f-links">
-          <h4>Destek</h4>
-          <a href="#">S.S.S</a>
-          <a href="#">İletişim Kur</a>
-          <a href="#">KVKK</a>
-          <a href="#">Gizlilik Politikası</a>
-        </div>
-      </div>
-    </footer>
   </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-cont">
+      <div class="f-brand">
+        <div style="font-size: 24px; font-weight:800; font-family:'Outfit', sans-serif;">Findie.</div>
+        <p>Yeni nesil işletmeler için modern, akıllı, limitsiz kurumsal finans yönetim platformu. 2026</p>
+      </div>
+      <div class="f-links">
+        <h4>Çözümler</h4>
+        <a href="product.html">Ön Muhasebe</a>
+        <a href="product.html">e-Fatura</a>
+        <a href="product.html">Stok Yönetimi</a>
+        <a href="product.html">Mali Analiz</a>
+      </div>
+      <div class="f-links">
+        <h4>Destek</h4>
+        <a href="#">S.S.S</a>
+        <a href="#">İletişim Kur</a>
+        <a href="#">KVKK</a>
+        <a href="#">Gizlilik Politikası</a>
+      </div>
+    </div>
+  </footer>
 
   <script src="./js/script.js"></script>
 </body>

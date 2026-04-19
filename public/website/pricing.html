@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Findie | Fiyatlandırma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    .content-wrapper { padding-top: 120px; min-height: 80vh; }
+  </style>
+</head>
+<body>
+  
+  <div class="bg-glow">
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3"></div>
+  </div>
+
+  <nav id="navbar" class="glass-nav">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Findie</a>
+      <div class="nav-links">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="product.html">Findie Nedir?</a>
+        <a href="compare.html">Karşılaştırma</a>
+        <a href="pricing.html" class="active">Fiyatlandırma</a>
+      </div>
+      <div class="nav-actions">
+        <a href="/" class="btn-demo">Uygulamaya Git</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content-wrapper">
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="section-pricing">
+      <div class="container">
+        <div class="section-head text-center fade-in">
+          <h2 class="sec-title">Şeffaf <span class="text-gradient">Fiyatlandırma</span></h2>
+          <p class="sec-desc">Ekibinizin ve işletmenizin büyüklüğüne en uygun paketi hiçbir sürpriz limit olmadan seçin.</p>
+          
+          <div class="billing-toggle mt-40">
+            <span class="bt-label">Aylık</span>
+            <label class="switch">
+              <input type="checkbox" id="billingSwitch">
+              <span class="slider round"></span>
+            </label>
+            <span class="bt-label">Yıllık <span class="discount-badge">%20 İndirim</span></span>
+          </div>
+        </div>
+
+        <div class="pricing-grid mt-40">
+          
+          <!-- Free / Demo -->
+          <div class="price-card fade-up" data-delay="0">
+            <div class="pc-head">
+              <h3>Demo Vakti</h3>
+              <p>Temel araçları denemeniz için.</p>
+            </div>
+            <div class="pc-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="0" data-yearly="0">0</span>
+              <span class="period">/aylık</span>
+            </div>
+            <ul class="pc-features">
+              <li>1 Aylık Kullanım Şansı</li>
+              <li>Tüm Temel Gelir/Gider Modülleri</li>
+              <li class="disabled">AI Pitch Erişimi Yok</li>
+              <li class="disabled">Excel Dışa Aktarma Yok</li>
+            </ul>
+            <a href="/" class="btn-outline-block">Platformu Gez</a>
+          </div>
+
+          <!-- Indie Pack (Most Popular) -->
+          <div class="price-card popular fade-up" data-delay="100">
+            <div class="popular-badge">En Çok Tercih Edilen</div>
+            <div class="pc-head">
+              <h3>Indie Pack</h3>
+              <p>Büyüyen startup ve KOBİ'ler için.</p>
+            </div>
+            <div class="pc-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="17" data-yearly="13">17</span>
+              <span class="period" id="per1">/aylık</span>
+            </div>
+            <ul class="pc-features">
+              <li>Maksimum 10 Kullanıcı Hesabı</li>
+              <li>AI Pitch Yapay Zeka Desteği</li>
+              <li>Aylık Takvim Entegrasyonu</li>
+              <li>KDV ve Müşteri Analizleri</li>
+              <li class="disabled">Excel Dışa Aktarma (Kapalı)</li>
+            </ul>
+            <a href="/" class="btn-primary-block">Hemen Başla</a>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="price-card fade-up" data-delay="200">
+            <div class="pc-head">
+              <h3>Enterprise</h3>
+              <p>Tüm limite sahip dev operasyonlar için.</p>
+            </div>
+            <div class="pc-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="49" data-yearly="39">49</span>
+              <span class="period" id="per2">/aylık</span>
+            </div>
+            <ul class="pc-features">
+              <li>Limitsiz Kullanıcı Hesabı (Sınırsız)</li>
+              <li>Tüm Yapay Zeka Fonksiyonları</li>
+              <li>Excel/PDF Tam Yönetim İzni</li>
+              <li>Özelleştirilebilir 12+ Dashboard Widget</li>
+              <li>Öncelikli Destek Servisi</li>
+            </ul>
+            <a href="/" class="btn-outline-block">Limitsiz Keşfet</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-cont">
+      <div class="f-brand">
+        <div style="font-size: 24px; font-weight:800; font-family:'Outfit', sans-serif;">Findie.</div>
+        <p>Yeni nesil işletmeler için modern, akıllı, limitsiz kurumsal finans yönetim platformu. 2026</p>
+      </div>
+      <div class="f-links">
+        <h4>Çözümler</h4>
+        <a href="product.html">Ön Muhasebe</a>
+        <a href="product.html">e-Fatura</a>
+        <a href="product.html">Stok Yönetimi</a>
+        <a href="product.html">Mali Analiz</a>
+      </div>
+      <div class="f-links">
+        <h4>Destek</h4>
+        <a href="#">S.S.S</a>
+        <a href="#">İletişim Kur</a>
+        <a href="#">KVKK</a>
+        <a href="#">Gizlilik Politikası</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/script.js"></script>
+</body>
+</html>
