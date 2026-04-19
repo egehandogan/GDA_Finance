@@ -137,7 +137,7 @@ window._sendSupport = function() {
   btn.disabled = true;
   setTimeout(() => {
     showModal(`<div style="padding:48px 24px;text-align:center">
-      <div style="width:64px;height:64px;background:var(--green-50);color:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 20px;border:2px solid #d1fae5">✓</div>
+      <div style="width:64px;height:64px;background:var(--green-50);color:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 20px;border:2px solid #d1fae5"><svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
       <h3 style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px">Destek Talebi Gönderildi</h3>
       <p style="color:var(--t3);font-size:13.5px;margin-bottom:28px;line-height:1.6">Talebiniz başarıyla iletildi.<br>GDA Kurumsal ekibi en kısa sürede geri dönüş yapacaktır.</p>
       <button class="btn btn-blue" onclick="window.closeModal();navigate('dashboard')" style="width:100%;justify-content:center">
@@ -201,9 +201,9 @@ window._valAdmin = function() {
   const isCorp = email.includes('@') && !email.endsWith('@gmail.com') && !email.endsWith('@hotmail.com') && !email.endsWith('@yahoo.com') && !email.endsWith('@outlook.com');
 
   if (errEl) {
-    if (email && !emailRegex.test(email)) errEl.textContent = '⚠ Geçerli bir e-posta adresi girin.';
-    else if (email && !isCorp) errEl.textContent = '⚠ Sadece kurumsal e-posta adresleri kabul edilir.';
-    else if (pass && pass.length < 6) errEl.textContent = '⚠ Şifre en az 6 karakter olmalıdır.';
+    if (email && !emailRegex.test(email)) errEl.textContent = '<svg class="lucide lucide-triangle-alert inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg> Geçerli bir e-posta adresi girin.';
+    else if (email && !isCorp) errEl.textContent = '<svg class="lucide lucide-triangle-alert inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg> Sadece kurumsal e-posta adresleri kabul edilir.';
+    else if (pass && pass.length < 6) errEl.textContent = '<svg class="lucide lucide-triangle-alert inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg> Şifre en az 6 karakter olmalıdır.';
     else errEl.textContent = '';
   }
   if (btn) btn.disabled = !(emailRegex.test(email) && isCorp && pass.length >= 6);
@@ -216,7 +216,7 @@ window._setAdmin = function() {
   if (btn) { btn.textContent = 'Atanıyor…'; btn.disabled = true; }
   setTimeout(() => {
     closeModal();
-    toast(`${email} yönetici olarak atandı ✓`, 'ok');
+    toast(`${email} yönetici olarak atandı <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`, 'ok');
   }, 700);
 };
 

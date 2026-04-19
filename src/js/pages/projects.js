@@ -120,7 +120,7 @@ window._saveIs = function(id) {
   if (!baslik) { toast('İş adı gerekli', 'warn'); return; }
   const rec = { id: id || uid(), baslik, musteri: document.getElementById('is-musteri').value, etiket: document.getElementById('is-etiket').value, durum: document.getElementById('is-durum').value, oncelik: document.getElementById('is-onc').value, baslangic: document.getElementById('is-bas').value, bitis: document.getElementById('is-bit').value, tutar: parseFloat(document.getElementById('is-tutar').value) || 0, atanan: '', notlar: document.getElementById('is-not').value };
   if (id) { const i = S.isTakip.findIndex(x => x.id === id); S.isTakip[i] = rec; } else S.isTakip.push(rec);
-  saveStore(); closeModal(); renderIsTakip(); toast('Kaydedildi ✓');
+  saveStore(); closeModal(); renderIsTakip(); toast('Kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._delIs = function(id) {

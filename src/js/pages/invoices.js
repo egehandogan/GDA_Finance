@@ -236,7 +236,7 @@ window._saveFatura = function(id) {
   if (!kalemler.length) { toast('En az bir kalem ekleyin', 'warn'); return; }
   const rec = { id: id || uid(), no, tarih: document.getElementById('fn-tarih')?.value || TODAY(), vade: document.getElementById('fn-vade')?.value || '', musteri, kalemler, ara: Math.round(ara * 100) / 100, kdv: Math.round(kdvTop * 100) / 100, toplam: Math.round((ara + kdvTop) * 100) / 100, durum: document.getElementById('fn-durum')?.value || 'bekliyor', not: document.getElementById('fn-not')?.value || '' };
   if (id) { const i = S.faturalar.findIndex(x => x.id === id); S.faturalar[i] = rec; } else S.faturalar.push(rec);
-  saveStore(); closeModal(); renderFaturalar(); toast('Fatura kaydedildi ✓');
+  saveStore(); closeModal(); renderFaturalar(); toast('Fatura kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 // ── Fatura Görüntüle ──────────────────────────────────────────────────────────
@@ -258,7 +258,7 @@ window._viewFatura = function(id) {
     <div style="display:flex;gap:8px">
       <button class="btn btn-ghost btn-sm no-print" onclick="window.print()">🖨️ Yazdır</button>
       <button class="btn btn-light btn-sm" onclick="window.closeModal();window._openYeniFaturaModal('${f.id}')">Düzenle</button>
-      ${f.durum !== 'odendi' ? `<button class="btn btn-orange btn-sm" onclick="window.closeModal();window._markFaturaOdendi('${f.id}')">Ödendi ✓</button>` : ''}
+      ${f.durum !== 'odendi' ? `<button class="btn btn-orange btn-sm" onclick="window.closeModal();window._markFaturaOdendi('${f.id}')">Ödendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button>` : ''}
       <button class="modal-close" onclick="window.closeModal()">×</button>
     </div>
   </div>
@@ -266,7 +266,7 @@ window._viewFatura = function(id) {
     <div style="font-family:'${font}',sans-serif;padding:32px;background:#fff;border-radius:0 0 var(--rlg) var(--rlg)">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid ${color}">
         <div>
-          ${sirket.logo ? `<img src="${sirket.logo}" style="max-height:50px;max-width:180px;object-fit:contain;margin-bottom:8px;display:block">` : `<div style="font-size:22px;font-weight:800;color:${color}">${sirket.ad || 'GDA Finance'}</div>`}
+          ${sirket.logo ? `<img src="${sirket.logo}" style="max-height:50px;max-width:180px;object-fit:contain;margin-bottom:8px;display:block">` : `<div style="font-size:22px;font-weight:800;color:${color}">${sirket.ad || 'Findie'}</div>`}
           <div style="font-size:12px;color:#666;margin-top:4px">${sirket.adres || ''} ${sirket.il ? '· ' + sirket.il : ''}</div>
           <div style="font-size:12px;color:#666">VKN: ${sirket.vkn || '—'} · ${sirket.tel || ''}</div>
         </div>
@@ -322,7 +322,7 @@ window._viewFatura = function(id) {
 window._markFaturaOdendi = function(id) {
   confirmDlg('Fatura Ödendi mi?', 'Bu faturayı ödendi olarak işaretlemek üzeresiniz.', 'info', () => {
     const f = S.faturalar.find(x => x.id === id);
-    if (f) { f.durum = 'odendi'; saveStore(); renderFaturalar(); toast('Fatura ödendi olarak işaretlendi ✓'); }
+    if (f) { f.durum = 'odendi'; saveStore(); renderFaturalar(); toast('Fatura ödendi olarak işaretlendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'); }
   }, 'Evet, Ödendi');
 };
 
@@ -439,5 +439,5 @@ function renderPreview() {
   </div>`;
 }
 
-window.saveDesign = () => { saveStore(); toast('Tasarım kaydedildi ✓'); navigate('faturalar'); };
+window.saveDesign = () => { saveStore(); toast('Tasarım kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'); navigate('faturalar'); };
 window.markAsPaid = window._markFaturaOdendi;

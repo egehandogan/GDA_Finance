@@ -107,7 +107,7 @@ window._saveUrun = function(id) {
   if (!fiyat) { toast('Fiyat giriniz', 'warn'); return; }
   const rec = { id: id || uid(), kod, ad, aciklama: document.getElementById('u-aciklama').value, kategori: document.getElementById('u-kat').value, birimFiyat: fiyat, kdvOrani: parseFloat(document.getElementById('u-kdv').value) || 0, birim: document.getElementById('u-birim').value, link: document.getElementById('u-link').value.trim() };
   if (id) { const i = S.urunler.findIndex(u => u.id === id); S.urunler[i] = rec; } else S.urunler.push(rec);
-  saveStore(); closeModal(); renderUrunler(); toast('Ürün kaydedildi ✓');
+  saveStore(); closeModal(); renderUrunler(); toast('Ürün kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._delUrun = function(id) {
@@ -279,7 +279,7 @@ window._topluToFatura = function() {
   });
   if (!kalemler.length) { toast('Ürün listesi boş', 'warn'); return; }
   S.faturalar.push({ id: uid(), no: `FAT-${Date.now().toString().slice(-6)}`, tarih: new Date().toISOString().split('T')[0], vade: new Date(Date.now() + 30 * 864e5).toISOString().split('T')[0], musteri: musId, kalemler, ara: Math.round(ara * 100) / 100, kdv: Math.round(kdvT * 100) / 100, toplam: Math.round((ara + kdvT) * 100) / 100, durum: 'bekliyor', not: 'Toplu hesaplamadan oluşturuldu' });
-  saveStore(); navigate('faturalar'); toast('Fatura oluşturuldu ✓');
+  saveStore(); navigate('faturalar'); toast('Fatura oluşturuldu <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._clearToplu = function() {

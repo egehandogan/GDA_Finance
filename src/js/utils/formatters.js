@@ -1,5 +1,5 @@
 /**
- * GDA Finance Utility Formatters
+ * Findie Utility Formatters
  * Standardized formatting for Currency, Dates, and UI helpers
  */
 
@@ -21,10 +21,10 @@ export const GIDER_KAT = [
 
 // Card types
 export const KART_TIPLER = [
-  {val:'yol',lbl:'Yol Kartı',icon:'🚌',desc:'Ulaşım'},
-  {val:'yemek',lbl:'Yemek Kartı',icon:'🍽️',desc:'Yemek'},
-  {val:'sirket',lbl:'Şirket Kredi Kartı',icon:'💳',desc:'Genel'},
-  {val:'akaryakit',lbl:'Akaryakıt Kartı',icon:'⛽',desc:'Yakıt'},
+  {val:'yol',lbl:'Yol Kartı',icon:'<svg class="lucide lucide-bus inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2l.64-2.54c.24-.96.36-1.92.36-2.92V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v6.54c0 1 .12 1.96.36 2.92L3 17h2"/><path d="M14 17h-4"/><path d="M6 19a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/><path d="M22 19a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/><path d="M2 9h20"/><path d="M2 5h20"/><path d="M10 5v4"/><path d="M14 5v4"/></svg>',desc:'Ulaşım'},
+  {val:'yemek',lbl:'Yemek Kartı',icon:'<svg class="lucide lucide-utensils inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>',desc:'Yemek'},
+  {val:'sirket',lbl:'Şirket Kredi Kartı',icon:'<svg class="lucide lucide-credit-card inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>',desc:'Genel'},
+  {val:'akaryakit',lbl:'Akaryakıt Kartı',icon:'<svg class="lucide lucide-fuel inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="15" y1="22" y2="22"/><line x1="4" x2="14" y1="9" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/></svg>',desc:'Yakıt'},
   {val:'diger',lbl:'Diğer Kart',icon:'🪪',desc:'Diğer'},
 ];
 

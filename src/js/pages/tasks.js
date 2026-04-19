@@ -84,7 +84,7 @@ window._renderOdemeListesi = function() {
         <td class="tr mono" style="font-weight:700">${TL(o.tutar)}</td>
         <td><span class="badge ${statusBadge}">${statusLabel}</span></td>
         <td style="white-space:nowrap">
-          ${o.durum !== 'odendi' ? `<button class="btn btn-light btn-xs" onclick="window._markOdendi('${o.id}')" style="margin-right:4px">Ödendi ✓</button>` : ''}
+          ${o.durum !== 'odendi' ? `<button class="btn btn-light btn-xs" onclick="window._markOdendi('${o.id}')" style="margin-right:4px">Ödendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button>` : ''}
           <button class="btn btn-danger-soft btn-xs" onclick="window._delOdeme('${o.id}')">Sil</button>
         </td>
       </tr>`;
@@ -120,12 +120,12 @@ window._saveOdeme = function(id) {
   if (!baslik || !tutar) { toast('Başlık ve tutar gerekli', 'warn'); return; }
   const rec = { id: id || uid(), baslik, alici: document.getElementById('o-alici').value, kategori: document.getElementById('o-kat').value, tutar, vade: document.getElementById('o-vade').value, tekrar: document.getElementById('o-tekrar').value, durum: document.getElementById('o-durum').value, notlar: document.getElementById('o-not').value };
   if (id) { const i = S.odemeTakip.findIndex(x => x.id === id); S.odemeTakip[i] = rec; } else S.odemeTakip.push(rec);
-  saveStore(); closeModal(); renderOdemeTakip(); toast('Kaydedildi ✓');
+  saveStore(); closeModal(); renderOdemeTakip(); toast('Kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._markOdendi = function(id) {
   const o = S.odemeTakip.find(x => x.id === id);
-  if (o) { o.durum = 'odendi'; saveStore(); window._renderOdemeListesi(); toast('Ödeme işaretlendi ✓'); }
+  if (o) { o.durum = 'odendi'; saveStore(); window._renderOdemeListesi(); toast('Ödeme işaretlendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'); }
 };
 
 window._delOdeme = function(id) {

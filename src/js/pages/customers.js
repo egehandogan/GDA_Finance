@@ -63,7 +63,7 @@ function mName(m) {
 function renderMusCards(rows) {
   const el = document.getElementById('mus-stab-0'); if (!el) return;
   if (!rows.length) {
-    el.innerHTML = `<div style="text-align:center;padding:80px;color:var(--t3)"><div style="font-size:40px;margin-bottom:14px">👥</div><div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:8px">Müşteri bulunamadı</div>Yeni müşteri eklemek için "YENİ MÜŞTERİ EKLE" butonunu kullanın.<br><button class="btn btn-orange btn-sm" onclick="window._openMusteriModal()" style="margin-top:14px">MÜŞTERİ EKLE</button></div>`;
+    el.innerHTML = `<div style="text-align:center;padding:80px;color:var(--t3)"><div style="font-size:40px;margin-bottom:14px"><svg class="lucide lucide-users inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:8px">Müşteri bulunamadı</div>Yeni müşteri eklemek için "YENİ MÜŞTERİ EKLE" butonunu kullanın.<br><button class="btn btn-orange btn-sm" onclick="window._openMusteriModal()" style="margin-top:14px">MÜŞTERİ EKLE</button></div>`;
     return;
   }
   el.innerHTML = `<div class="mc-grid anim">
@@ -279,7 +279,7 @@ window._saveMusteri = function(id) {
     rec = { id: id || uid(), tip, ad, soyad, tc: document.getElementById('m-tc')?.value || '', tel: document.getElementById('m-tel')?.value || '', email: document.getElementById('m-email')?.value || '', adres: document.getElementById('m-adres')?.value || '', renk: id ? S.musteriler.find(x => x.id === id)?.renk : hashColor(`${ad}${soyad}`) };
   }
   if (id) { const i = S.musteriler.findIndex(x => x.id === id); S.musteriler[i] = rec; } else S.musteriler.push(rec);
-  saveStore(); closeModal(); renderMusteriler(); toast('Müşteri kaydedildi ✓');
+  saveStore(); closeModal(); renderMusteriler(); toast('Müşteri kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._delMusteri = function(id) {

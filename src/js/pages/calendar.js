@@ -41,7 +41,7 @@ function buildCalendar() {
   const gelirEvs = S.gelirler.filter(g => g.tarih.startsWith(ym)).map(g => ({ date: g.tarih, tip: 'gelir', label: `↑ ${g.aciklama || g.kategori}`, tutar: g.toplamTutar }));
   const giderEvs = S.giderler.filter(g => g.tarih.startsWith(ym)).map(g => ({ date: g.tarih, tip: 'gider', label: `↓ ${g.aciklama || g.kategori}`, tutar: g.toplamTutar }));
   const faturaEvs = S.faturalar.filter(f => f.vade && f.vade.startsWith(ym)).map(f => ({ date: f.vade, tip: 'fatura', label: `🧾 ${f.no}`, tutar: f.toplam, durum: f.durum }));
-  const odemeEvs = S.odemeTakip.filter(o => o.vade && o.vade.startsWith(ym)).map(o => ({ date: o.vade, tip: 'odeme', label: `💳 ${o.baslik}`, tutar: o.tutar, durum: o.durum }));
+  const odemeEvs = S.odemeTakip.filter(o => o.vade && o.vade.startsWith(ym)).map(o => ({ date: o.vade, tip: 'odeme', label: `<svg class="lucide lucide-credit-card inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg> ${o.baslik}`, tutar: o.tutar, durum: o.durum }));
   const manualEvs = S.calendarEvents.filter(e => e.tarih.startsWith(ym)).map(e => ({ date: e.tarih, tip: 'not', label: e.baslik, id: e.id }));
   const allEvs = [...gelirEvs, ...giderEvs, ...faturaEvs, ...odemeEvs, ...manualEvs];
 
@@ -134,7 +134,7 @@ window._saveCalEvent = function() {
   const tarih = document.getElementById('ce-tarih').value;
   if (!baslik || !tarih) { toast('Başlık ve tarih gerekli', 'warn'); return; }
   S.calendarEvents.push({ id: uid(), baslik, tarih, saat: document.getElementById('ce-saat').value || null, tip: document.getElementById('ce-tip').value, renk: document.getElementById('ce-renk').value, aciklama: document.getElementById('ce-aciklama').value, tum_gun: !document.getElementById('ce-saat').value });
-  saveStore(); closeModal(); buildCalendar(); toast('Etkinlik eklendi ✓');
+  saveStore(); closeModal(); buildCalendar(); toast('Etkinlik eklendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._delCalEvent = function(id) {

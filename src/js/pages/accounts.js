@@ -48,7 +48,7 @@ window._saveHesap = function(id) {
   if (!ad) { toast('Hesap adı gerekli', 'warn'); return; }
   const rec = { id: id || uid(), ad, tip: document.getElementById('h-tip').value, bakiye: parseFloat(document.getElementById('h-bakiye').value) || 0 };
   if (id) { const i = S.hesaplar.findIndex(x => x.id === id); S.hesaplar[i] = rec; } else S.hesaplar.push(rec);
-  saveStore(); closeModal(); renderHesaplar(); toast('Hesap kaydedildi ✓');
+  saveStore(); closeModal(); renderHesaplar(); toast('Hesap kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._delHesap = function(id) {
@@ -72,7 +72,7 @@ export function renderKartlar() {
       <div class="sc-row anim">
         <div class="sc"><div class="sc-label">Toplam Kart</div><div class="sc-val">${S.kartlar.length}</div></div>
       </div>
-      ${S.kartlar.length === 0 ? `<div style="text-align:center;padding:60px;color:var(--t3)"><div style="font-size:40px;margin-bottom:12px">💳</div>Henüz kart eklenmemiş<br><button class="btn btn-orange btn-sm" onclick="window._openKartModal()" style="margin-top:14px">+ İlk Kartı Ekle</button></div>` : `
+      ${S.kartlar.length === 0 ? `<div style="text-align:center;padding:60px;color:var(--t3)"><div style="font-size:40px;margin-bottom:12px"><svg class="lucide lucide-credit-card inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div>Henüz kart eklenmemiş<br><button class="btn btn-orange btn-sm" onclick="window._openKartModal()" style="margin-top:14px">+ İlk Kartı Ekle</button></div>` : `
       <div class="kart-grid anim d1">
         ${S.kartlar.map(k => {
           const sira = [...k.bakiyeler].sort((a, b) => b.ay.localeCompare(a.ay));
@@ -259,7 +259,7 @@ window._saveKart = function(id) {
   const tip = document.querySelector('[name=kt-tip]:checked')?.value || 'diger';
   const rec = { id: id || uid(), ad, tip, banka: document.getElementById('k-banka').value.trim(), sonDort: document.getElementById('k-son4').value.trim(), limit: parseFloat(document.getElementById('k-limit').value) || 0, renk: document.getElementById('k-renk').value, bakiyeler: id ? S.kartlar.find(x => x.id === id).bakiyeler : [] };
   if (id) { const i = S.kartlar.findIndex(x => x.id === id); S.kartlar[i] = rec; } else S.kartlar.push(rec);
-  saveStore(); closeModal(); renderKartlar(); toast('Kart kaydedildi ✓');
+  saveStore(); closeModal(); renderKartlar(); toast('Kart kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._openBakiyeModal = function(kartId) {
@@ -290,12 +290,12 @@ window._saveBakiye = function(kartId) {
   if (mevcut) {
     confirmDlg('Bakiye zaten var', `${MS[parseInt(ay.split('-')[1]) - 1]} için kayıt mevcut. Üzerine yazılsın mı?`, 'warn', () => {
       mevcut.tutar = tutar; mevcut.aciklama = document.getElementById('b-aciklama').value;
-      saveStore(); closeModal(); window._renderKartDetay(kartId); toast('Bakiye güncellendi ✓');
+      saveStore(); closeModal(); window._renderKartDetay(kartId); toast('Bakiye güncellendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
     }, 'Evet, Güncelle');
     return;
   }
   k.bakiyeler.push({ id: uid(), ay, tutar, aciklama: document.getElementById('b-aciklama').value });
-  saveStore(); closeModal(); window._renderKartDetay(kartId); toast('Bakiye eklendi ✓');
+  saveStore(); closeModal(); window._renderKartDetay(kartId); toast('Bakiye eklendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._confirmSilKart = function(id) {

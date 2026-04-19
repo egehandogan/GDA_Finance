@@ -33,7 +33,7 @@ export function renderDashboard() {
 
   if (actionHdr) {
     actionHdr.innerHTML = `
-      <button class="btn btn-ghost btn-sm" onclick="navigate('ai-pitch')" style="gap:6px">🚀 AI Pitch</button>
+      <button class="btn btn-ghost btn-sm" onclick="navigate('ai-pitch')" style="gap:6px"><svg class="lucide lucide-rocket inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg> AI Pitch</button>
       <button class="btn btn-ghost btn-sm" onclick="navigate('analiz')">Analiz</button>
       <button class="btn btn-orange" onclick="navigate('gelirler')">+ GELİR EKLE</button>`;
   }
@@ -146,7 +146,7 @@ export function renderDashboard() {
     <div class="card-row anim d2" style="margin-bottom:16px;align-items:start">
       ${w.personel ? `<div class="card cp" style="flex:1">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-          <div class="ct" style="margin-bottom:0">👥 Personel Özeti</div>
+          <div class="ct" style="margin-bottom:0"><svg class="lucide lucide-users inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Personel Özeti</div>
           <button class="btn btn-light btn-xs" onclick="navigate('personeller')">Tümü →</button>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
@@ -176,13 +176,13 @@ export function renderDashboard() {
 
       ${w.takvim_hafta ? `<div class="card cp" style="flex:1">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-          <div class="ct" style="margin-bottom:0">📅 Bu Haftaki Etkinlikler</div>
+          <div class="ct" style="margin-bottom:0"><svg class="lucide lucide-calendar inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg> Bu Haftaki Etkinlikler</div>
           <button class="btn btn-light btn-xs" onclick="navigate('takvim')">Takvim →</button>
         </div>
         <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">
           ${weekStart.toLocaleDateString('tr-TR', { day:'numeric', month:'long' })} – ${weekEnd.toLocaleDateString('tr-TR', { day:'numeric', month:'long' })}
         </div>
-        ${weekEvents.length === 0 ? `<div style="text-align:center;padding:30px 10px;color:var(--t3)"><div style="font-size:28px;margin-bottom:8px">📭</div><div style="font-size:12.5px">Bu hafta etkinlik bulunmuyor</div></div>` :
+        ${weekEvents.length === 0 ? `<div style="text-align:center;padding:30px 10px;color:var(--t3)"><div style="font-size:28px;margin-bottom:8px"><svg class="lucide lucide-mailbox inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Z"/><path d="M4 9h16"/><path d="M8 13h8"/></svg></div><div style="font-size:12.5px">Bu hafta etkinlik bulunmuyor</div></div>` :
           weekEvents.slice(0, 6).map(e => `<div style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border2)">
             <div style="background:var(--blue-50);border-radius:6px;padding:4px 7px;text-align:center;flex-shrink:0">
               <div style="font-size:14px;font-weight:800;color:var(--blue)">${new Date(e.tarih).getDate()}</div>
@@ -198,12 +198,12 @@ export function renderDashboard() {
 
       ${w.son_islemler ? `<div class="card cp" style="flex:1">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-          <div class="ct" style="margin-bottom:0">🕐 Son İşlemler</div>
+          <div class="ct" style="margin-bottom:0"><svg class="lucide lucide-clock inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Son İşlemler</div>
           <button class="btn btn-light btn-xs" onclick="navigate('gelirler')">Tümü →</button>
         </div>
         ${[...S.gelirler.map(g => ({...g, _type:'gelir'})), ...S.giderler.map(g => ({...g, _type:'gider'}))].sort((a,b)=>b.tarih.localeCompare(a.tarih)).slice(0,8).map(it => `
           <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border2)">
-            <div style="width:28px;height:28px;border-radius:8px;background:${it._type==='gelir'?'var(--green-50)':'var(--red-50)'};display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">${it._type==='gelir'?'💰':'📋'}</div>
+            <div style="width:28px;height:28px;border-radius:8px;background:${it._type==='gelir'?'var(--green-50)':'var(--red-50)'};display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">${it._type==='gelir'?'<svg class="lucide lucide-coins inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>':'<svg class="lucide lucide-clipboard-list inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>'}</div>
             <div style="flex:1;min-width:0">
               <div style="font-size:12.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${it.aciklama || it.kategori || '—'}</div>
               <div style="font-size:10.5px;color:var(--t3)">${DT(it.tarih)}</div>
@@ -218,7 +218,7 @@ export function renderDashboard() {
     <div class="card-row anim d3" style="align-items:start">
       ${w.kart_ozetleri ? `<div class="card cp" style="flex:1">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-          <div class="ct" style="margin-bottom:0">💳 Kart Özetleri</div>
+          <div class="ct" style="margin-bottom:0"><svg class="lucide lucide-credit-card inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg> Kart Özetleri</div>
           <button class="btn btn-light btn-xs" onclick="navigate('kartlar')">Kartlar →</button>
         </div>
         ${kartlar.length === 0 ? `<div style="text-align:center;padding:20px;color:var(--t3);font-size:12.5px">Kayıtlı kart yok</div>` :
@@ -235,7 +235,7 @@ export function renderDashboard() {
           <div style="display:flex;flex-direction:column;gap:5px">
             ${kartlar.slice(0, 4).map(k => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--bg);border-radius:7px">
               <div style="display:flex;align-items:center;gap:8px">
-                <span style="font-size:14px">${k.tip==='yemek'?'🍽️':k.tip==='yol'?'🚌':k.tip==='akaryakit'?'⛽':'💳'}</span>
+                <span style="font-size:14px">${k.tip==='yemek'?'<svg class="lucide lucide-utensils inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>':k.tip==='yol'?'<svg class="lucide lucide-bus inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2l.64-2.54c.24-.96.36-1.92.36-2.92V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v6.54c0 1 .12 1.96.36 2.92L3 17h2"/><path d="M14 17h-4"/><path d="M6 19a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/><path d="M22 19a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/><path d="M2 9h20"/><path d="M2 5h20"/><path d="M10 5v4"/><path d="M14 5v4"/></svg>':k.tip==='akaryakit'?'<svg class="lucide lucide-fuel inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="15" y1="22" y2="22"/><line x1="4" x2="14" y1="9" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/></svg>':'<svg class="lucide lucide-credit-card inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>'}</span>
                 <span style="font-size:12.5px;font-weight:600">${k.ad || k.tip}</span>
               </div>
               <span style="font-size:12.5px;font-weight:700;color:var(--blue)">${TL(k.bakiye||0)}</span>
@@ -245,7 +245,7 @@ export function renderDashboard() {
 
       ${w.musteri_top && custTop.length > 0 ? `<div class="card cp" style="flex:1">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-          <div class="ct" style="margin-bottom:0">🏆 En İyi Müşteriler</div>
+          <div class="ct" style="margin-bottom:0"><svg class="lucide lucide-trophy inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> En İyi Müşteriler</div>
           <button class="btn btn-light btn-xs" onclick="navigate('musteriler')">Tümü →</button>
         </div>
         ${custTop.map((cx, i) => `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border2)">
@@ -260,11 +260,11 @@ export function renderDashboard() {
 
       ${w.fatura_durum ? `<div class="card cp" style="flex:1">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-          <div class="ct" style="margin-bottom:0">📄 Fatura Durumu</div>
+          <div class="ct" style="margin-bottom:0"><svg class="lucide lucide-file-text inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Fatura Durumu</div>
           <button class="btn btn-light btn-xs" onclick="navigate('faturalar')">Faturalar →</button>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px">
-          ${[{key:'odendi',lbl:'Ödendi',c:'var(--green)',bg:'var(--green-50)',icon:'✓'},{key:'bekliyor',lbl:'Bekliyor',c:'var(--amber)',bg:'var(--amber-50)',icon:'⏳'},{key:'gecikti',lbl:'Gecikmiş',c:'var(--red)',bg:'var(--red-50)',icon:'⚠'}].map(r => `
+          ${[{key:'odendi',lbl:'Ödendi',c:'var(--green)',bg:'var(--green-50)',icon:'<svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'},{key:'bekliyor',lbl:'Bekliyor',c:'var(--amber)',bg:'var(--amber-50)',icon:'<svg class="lucide lucide-hourglass inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>'},{key:'gecikti',lbl:'Gecikmiş',c:'var(--red)',bg:'var(--red-50)',icon:'<svg class="lucide lucide-triangle-alert inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>'}].map(r => `
           <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:${r.bg};border-radius:8px">
             <span style="font-size:16px">${r.icon}</span>
             <div style="flex:1"><div style="font-size:12.5px;font-weight:600;color:${r.c}">${r.lbl}</div></div>

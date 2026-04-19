@@ -756,7 +756,7 @@ function renderLoginPage(err=''){
           <input type="password" id="login-pass" value="gda123" style="padding:12px;border-radius:10px;background:var(--border2);border-color:transparent" onkeydown="if(event.key==='Enter')handleLogin()">
         </div>
         
-        ${err?`<div style="color:var(--red);font-size:12px;margin-bottom:16px;text-align:left;animation:slideInRight 0.3s var(--bez)">⚠️ ${err}</div>`:''}
+        ${err?`<div style="color:var(--red);font-size:12px;margin-bottom:16px;text-align:left;animation:slideInRight 0.3s var(--bez)"><svg class="lucide lucide-triangle-alert inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>️ ${err}</div>`:''}
         
         <button class="btn btn-blue" id="login-btn" onclick="handleLogin()" style="width:100%;justify-content:center;height:44px;border-radius:12px;font-weight:700">Giriş Yap</button>
         
@@ -840,7 +840,7 @@ function sendSupport(){
   btn.textContent='Gönderiliyor…'; btn.disabled=true;
   setTimeout(()=>{
     showModal(`<div style="padding:40px;text-align:center">
-      <div style="width:60px;height:60px;background:var(--green-50);color:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 20px">✓</div>
+      <div style="width:60px;height:60px;background:var(--green-50);color:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 20px"><svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
       <h3 style="margin-bottom:10px">Destek Talebi Gönderildi</h3>
       <p style="color:var(--t3);font-size:13px;margin-bottom:24px">Talebiniz başarıyla iletildi. En kısa sürede geri dönüş yapacağız.</p>
       <button class="btn btn-blue" onclick="closeModal();navigate('dashboard')">Geri Dön</button>
@@ -883,7 +883,7 @@ function valAdmin(){
 }
 
 function setAdmin(){
-  toast('Yönetici ataması başarıyla tamamlandı ✓');
+  toast('Yönetici ataması başarıyla tamamlandı <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
   closeModal();
 }
 function toggleNav(){
@@ -1474,7 +1474,7 @@ function saveGider(){
     driveUrl
   });
   save();closeModal();renderGiderler();
-  toast(driveUrl?'Gider kaydedildi ve Drive\'a yüklendi ✓':'Gider kaydedildi ✓');
+  toast(driveUrl?'Gider kaydedildi ve Drive\'a yüklendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>':'Gider kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 function delGider(id){confirmDlg('Bu gider kaydı silinecek','Silmek istediğinizden emin misiniz?','danger',()=>{S.giderler=S.giderler.filter(g=>g.id!==id);save();renderGiderler();toast('Silindi','warn');});}
 function viewGiderBelge(id){
@@ -1489,7 +1489,7 @@ function viewGiderBelge(id){
     </div>
     ${isPdf
       ? `<div style="display:flex;align-items:center;gap:12px;padding:16px;background:var(--red-50);border-radius:8px">
-           <span style="font-size:36px">📄</span>
+           <span style="font-size:36px"><svg class="lucide lucide-file-text inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
            <div><div style="font-weight:600;color:var(--red)">${g.belge.name}</div><div style="font-size:12px;color:var(--t3)">PDF belgesi</div></div>
            <a href="${g.belge.data}" download="${g.belge.name}" class="btn btn-orange btn-sm" style="margin-left:auto">İndir</a>
          </div>`
@@ -1737,7 +1737,7 @@ function renderFaturaEditor(){
 
   window.saveTemplateChanges = () => {
     save();
-    toast('Tasarım değişiklikleri kaydedildi ✓');
+    toast('Tasarım değişiklikleri kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
   };
 
   updatePreview();
@@ -1886,7 +1886,7 @@ function saveFatura(){
   save();
   closeModal();
   renderFaturalar();
-  toast('Fatura başarıyla oluşturuldu ✓');
+  toast('Fatura başarıyla oluşturuldu <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 function toggleMuafiyet(val){
   const wrap=document.getElementById('muafiyet-kod-wrap');
@@ -2534,7 +2534,7 @@ function saveDriveSettings(){
   S.settings.depolama.driveFolderUrl=document.getElementById('dep-url')?.value.trim()||'';
   S.settings.depolama.driveApiKey=document.getElementById('dep-key')?.value.trim()||'';
   S.settings.depolama.driveClientId=document.getElementById('dep-cid')?.value.trim()||'';
-  save();toast('Drive ayarları kaydedildi ✓');
+  save();toast('Drive ayarları kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
   // Re-render to update connection chip
   renderSettings();switchStab(3,'s');
 }
@@ -2549,7 +2549,7 @@ async function testDriveConn(){
     const fid=url.match(/folders\/([a-zA-Z0-9_-]+)/)?.[1];
     if(!fid) throw new Error('Geçersiz URL');
     const res=await fetch(`https://www.googleapis.com/drive/v3/files/${fid}?key=${key}&fields=id,name`);
-    if(res.ok){const d=await res.json();r.innerHTML=`<div class="ocr-status ok">✓ Bağlantı başarılı · Klasör: "${d.name}"</div>`;}
+    if(res.ok){const d=await res.json();r.innerHTML=`<div class="ocr-status ok"><svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Bağlantı başarılı · Klasör: "${d.name}"</div>`;}
     else throw new Error((await res.json()).error?.message||'Erişim reddedildi');
   }catch(e){r.innerHTML=`<div class="ocr-status fail">✗ ${e.message}</div>`;}
 }
@@ -2610,7 +2610,7 @@ function loadLogo(input){
   const file=input.files[0];if(!file) return;
   if(file.size>2*1024*1024){toast('Logo 2MB\'dan küçük olmalı','warn');return;}
   const reader=new FileReader();
-  reader.onload=e=>{S.settings.sirket.logo=e.target.result;save();renderSettings();toast('Logo yüklendi ✓');};
+  reader.onload=e=>{S.settings.sirket.logo=e.target.result;save();renderSettings();toast('Logo yüklendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');};
   reader.readAsDataURL(file);
 }
 function removeLogo(){S.settings.sirket.logo=null;save();renderSettings();toast('Logo kaldırıldı','warn');}
@@ -2623,7 +2623,7 @@ function loadMusLogo(input){
     document.getElementById('m-logo').value=e.target.result;
     const prev=document.getElementById('mus-logo-drop');
     if(prev) prev.innerHTML=`<img src="${e.target.result}" style="height:60px;object-fit:contain" id="mus-logo-prev">`;
-    toast('Logo yüklendi ✓');
+    toast('Logo yüklendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
   };
   reader.readAsDataURL(file);
 }
@@ -2643,7 +2643,7 @@ function saveSirket(){
   save();
   // Update sidebar company name
   const cn=document.querySelector('.sn-cn');if(cn) cn.textContent=s.ad;
-  toast('Şirket bilgileri kaydedildi ✓');
+  toast('Şirket bilgileri kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 
 /* ═══════════════════════════════════════
@@ -2747,7 +2747,7 @@ function saveUrun(id){
   if(!fiyat){toast('Fiyat giriniz','warn');return;}
   const rec={id:id||uid(),kod,ad,aciklama:document.getElementById('u-aciklama').value,kategori:document.getElementById('u-kat').value,birimFiyat:fiyat,kdvOrani:parseFloat(document.getElementById('u-kdv').value)||0,birim:document.getElementById('u-birim').value,link:document.getElementById('u-link').value.trim()};
   if(id){const i=S.urunler.findIndex(u=>u.id===id);S.urunler[i]=rec;}else S.urunler.push(rec);
-  save();closeModal();renderUrunler();toast('Ürün kaydedildi ✓');
+  save();closeModal();renderUrunler();toast('Ürün kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 function delUrun(id){confirmDlg('Ürün silinecek','Bu ürün katalogdan kaldırılacak. Emin misiniz?','danger',()=>{S.urunler=S.urunler.filter(u=>u.id!==id);save();renderUrunler();toast('Silindi','warn');});}
 
@@ -3047,7 +3047,7 @@ function savePersonel(id){
   if(!brut){toast('Brüt maaş giriniz','warn');return;}
   const rec={id:id||uid(),ad,soyad,tc:document.getElementById('p-tc').value.trim(),pozisyon:document.getElementById('p-poz').value.trim()||'Personel',departman:document.getElementById('p-dept').value,iseGiris:document.getElementById('p-giris').value,brutMaas:brut,medeni:document.getElementById('p-med').value,cocuk:parseInt(document.getElementById('p-cocuk').value)||0,es:document.getElementById('p-es').value==='true',durumu:document.getElementById('p-dur').value,maaslar:id?S.personeller.find(x=>x.id===id).maaslar:[],notlar:document.getElementById('p-not').value};
   if(id){const i=S.personeller.findIndex(x=>x.id===id);S.personeller[i]=rec;}else S.personeller.push(rec);
-  save();closeModal();renderPersoneller();toast('Personel kaydedildi ✓');
+  save();closeModal();renderPersoneller();toast('Personel kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 function delPersonel(id){confirmDlg('Personel silinecek','Bordro geçmişi de silinecek. Emin misiniz?','danger',()=>{S.personeller=S.personeller.filter(p=>p.id!==id);save();renderPersoneller();toast('Silindi','warn');});}
 
@@ -3337,7 +3337,7 @@ function topluToFatura(){
   });
   if(!kalemler.length){toast('Ürün listesi boş','warn');return;}
   S.faturalar.push({id:uid(),no:`FAT-${Date.now().toString().slice(-6)}`,tarih:TODAY(),vade:new Date(Date.now()+30*864e5).toISOString().split('T')[0],musteri:musId,kalemler,ara:Math.round(ara*100)/100,kdv:Math.round(kdvT*100)/100,toplam:Math.round((ara+kdvT)*100)/100,durum:'bekliyor',not:'Toplu hesaplamadan oluşturuldu'});
-  save();navigate('faturalar');toast('Fatura oluşturuldu ✓');
+  save();navigate('faturalar');toast('Fatura oluşturuldu <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 function clearToplu(){confirmDlg('Tablo temizlenecek','Tüm ürün satırları kaldırılacak. Emin misiniz?','warn',()=>{document.querySelectorAll('#toplu-tbody tr').forEach(tr=>tr.remove());calcToplu();});}
 
@@ -3426,7 +3426,7 @@ function renderKartlar(){
         }).join('')}
       </div>
       <!-- Kart grid -->
-      ${S.kartlar.length===0?`<div style="text-align:center;padding:60px;color:var(--t3)"><div style="font-size:40px;margin-bottom:12px">💳</div>Henüz kart eklenmemiş<br><button class="btn btn-orange btn-sm" onclick="openKartModal()" style="margin-top:14px">+ İlk Kartı Ekle</button></div>`:`
+      ${S.kartlar.length===0?`<div style="text-align:center;padding:60px;color:var(--t3)"><div style="font-size:40px;margin-bottom:12px"><svg class="lucide lucide-credit-card inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div>Henüz kart eklenmemiş<br><button class="btn btn-orange btn-sm" onclick="openKartModal()" style="margin-top:14px">+ İlk Kartı Ekle</button></div>`:`
       <div class="kart-grid anim d1">
         ${S.kartlar.map(k=>{
           const sira=[...k.bakiyeler].sort((a,b)=>b.ay.localeCompare(a.ay));
@@ -3608,7 +3608,7 @@ function saveKart(id){
   const tip=document.querySelector('[name=kt-tip]:checked')?.value||'diger';
   const rec={id:id||uid(),ad,tip,banka:document.getElementById('k-banka').value.trim(),sonDort:document.getElementById('k-son4').value.trim(),limit:parseFloat(document.getElementById('k-limit').value)||0,renk:document.getElementById('k-renk').value,bakiyeler:id?S.kartlar.find(x=>x.id===id).bakiyeler:[]};
   if(id){const i=S.kartlar.findIndex(x=>x.id===id);S.kartlar[i]=rec;}else S.kartlar.push(rec);
-  save();closeModal();renderKartlar();toast('Kart kaydedildi ✓');
+  save();closeModal();renderKartlar();toast('Kart kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 
 function openBakiyeModal(kartId){
@@ -3639,12 +3639,12 @@ function saveBakiye(kartId){
   if(mevcut){
     confirmDlg('Bakiye zaten var',`${MS[parseInt(ay.split('-')[1])-1]} için kayıt mevcut. Üzerine yazılsın mı?`,'warn',()=>{
       mevcut.tutar=tutar;mevcut.aciklama=document.getElementById('b-aciklama').value;
-      save();closeModal();renderKartDetay(kartId);toast('Bakiye güncellendi ✓');
+      save();closeModal();renderKartDetay(kartId);toast('Bakiye güncellendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
     },'Evet, Güncelle');
     return;
   }
   k.bakiyeler.push({id:uid(),ay,tutar,aciklama:document.getElementById('b-aciklama').value});
-  save();closeModal();renderKartDetay(kartId);toast('Bakiye eklendi ✓');
+  save();closeModal();renderKartDetay(kartId);toast('Bakiye eklendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 
 /* ═══════════════════════════════════════
@@ -3742,7 +3742,7 @@ function renderOCRFields(parsed,status,fieldsDiv){
   const total=validFields.length;
   const autoCount=autoFilled.length;
   if(status){
-    if(autoCount>=4) status.innerHTML=`<div class="ocr-status ok">✓ ${autoCount}/${total} alan otomatik dolduruldu — Aşağıdan kontrol edip onaylayın</div>`;
+    if(autoCount>=4) status.innerHTML=`<div class="ocr-status ok"><svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> ${autoCount}/${total} alan otomatik dolduruldu — Aşağıdan kontrol edip onaylayın</div>`;
     else if(autoCount>0) status.innerHTML=`<div class="ocr-status partial">◑ ${autoCount}/${total} alan dolduruldu — Düşük güvenli alanları manuel onaylayın</div>`;
     else status.innerHTML=`<div class="ocr-status fail">Otomatik doldurulamadı — OCR sonuçlarını aşağıdan inceleyip seçin</div>`;
   }
@@ -3764,7 +3764,7 @@ function renderOCRFields(parsed,status,fieldsDiv){
         const statusIcon=isInfoOnly
           ?'<span style="font-size:12px;color:var(--t3)">ℹ</span>'
           :isAccepted
-            ?'<span style="color:var(--green);font-size:14px">✓</span>'
+            ?'<span style="color:var(--green);font-size:14px"><svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>'
             :'<span style="font-size:12px;color:var(--t2);font-weight:600">Uygula →</span>';
         return '<div class="'+cardClass+'" id="ocrf-'+key+'"'+clickAttr+'>'
           +'<div style="flex:1;min-width:0">'
@@ -3799,7 +3799,7 @@ function toggleOCRField(key){
     const applied=applyToForm(c.formId,field.deger,c.type);
     if(applied){
       ocrState.accepted[key]=true;
-      if(el){el.classList.add('accepted');el.querySelector('span:last-child').innerHTML='<span style="color:var(--green);font-size:14px">✓</span>';}
+      if(el){el.classList.add('accepted');el.querySelector('span:last-child').innerHTML='<span style="color:var(--green);font-size:14px"><svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>';}
     }
   }
   cG();
@@ -3812,7 +3812,7 @@ function applyAllOCR(){
     applyToForm(cfg.formId,field.deger,cfg.type);
     ocrState.accepted[key]=true;
     const el=document.getElementById(`ocrf-${key}`);
-    if(el){el.classList.add('accepted');const last=el.querySelector('span:last-child');if(last) last.innerHTML='<span style="color:var(--green);font-size:14px">✓</span>';}
+    if(el){el.classList.add('accepted');const last=el.querySelector('span:last-child');if(last) last.innerHTML='<span style="color:var(--green);font-size:14px"><svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>';}
   });
   cG();toast('Tüm OCR alanları uygulandı');
 }
@@ -3857,7 +3857,7 @@ async function handleGiderFile(file){
   prev.style.display='block';
   if(isPdf){
     prev.innerHTML=`<div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--red-50);border-radius:8px;border:1px solid rgba(220,38,38,.15)">
-      <span style="font-size:24px">📄</span>
+      <span style="font-size:24px"><svg class="lucide lucide-file-text inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
       <div><div style="font-weight:600;font-size:13px;color:var(--red)">${file.name}</div><div style="font-size:11.5px;color:var(--t3)">${(file.size/1024).toFixed(1)} KB · PDF</div></div>
     </div>`;
     const reader=new FileReader();
@@ -4017,7 +4017,7 @@ function buildCalendar(){
   // From faturalar (vade)
   const faturaEvs=S.faturalar.filter(f=>f.vade&&f.vade.startsWith(ym)).map(f=>({date:f.vade,tip:'fatura',label:`🧾 ${f.no}`,tutar:f.toplam,durum:f.durum}));
   // From odemeTakip
-  const odemeEvs=S.odemeTakip.filter(o=>o.vade&&o.vade.startsWith(ym)).map(o=>({date:o.vade,tip:'odeme',label:`💳 ${o.baslik}`,tutar:o.tutar,durum:o.durum}));
+  const odemeEvs=S.odemeTakip.filter(o=>o.vade&&o.vade.startsWith(ym)).map(o=>({date:o.vade,tip:'odeme',label:`<svg class="lucide lucide-credit-card inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg> ${o.baslik}`,tutar:o.tutar,durum:o.durum}));
   // Manual events
   const manualEvs=S.calendarEvents.filter(e=>e.tarih.startsWith(ym)).map(e=>({date:e.tarih,tip:'not',label:e.baslik,id:e.id}));
 
@@ -4116,7 +4116,7 @@ function saveCalEvent(){
   const tarih=document.getElementById('ce-tarih').value;
   if(!baslik||!tarih){toast('Başlık ve tarih gerekli','warn');return;}
   S.calendarEvents.push({id:uid(),baslik,tarih,saat:document.getElementById('ce-saat').value||null,tip:document.getElementById('ce-tip').value,renk:document.getElementById('ce-renk').value,aciklama:document.getElementById('ce-aciklama').value,tum_gun:!document.getElementById('ce-saat').value});
-  save();closeModal();buildCalendar();toast('Etkinlik eklendi ✓');
+  save();closeModal();buildCalendar();toast('Etkinlik eklendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 
 function delCalEvent(id){
@@ -4247,7 +4247,7 @@ function saveIs(id){
   if(!baslik){toast('İş adı gerekli','warn');return;}
   const rec={id:id||uid(),baslik,musteri:document.getElementById('is-musteri').value,etiket:document.getElementById('is-etiket').value,durum:document.getElementById('is-durum').value,oncelik:document.getElementById('is-onc').value,baslangic:document.getElementById('is-bas').value,bitis:document.getElementById('is-bit').value,tutar:parseFloat(document.getElementById('is-tutar').value)||0,atanan:'',notlar:document.getElementById('is-not').value};
   if(id){const i=S.isTakip.findIndex(x=>x.id===id);S.isTakip[i]=rec;}else S.isTakip.push(rec);
-  save();closeModal();renderIsTakip();toast('Kaydedildi ✓');
+  save();closeModal();renderIsTakip();toast('Kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 function delIs(id){
   confirmDlg('İş silinecek','Bu iş kaydı kaldırılacak. Emin misiniz?','danger',()=>{
@@ -4337,7 +4337,7 @@ function renderOdemeListesi(){
         <td class="tr mono" style="font-weight:700">${TL(o.tutar)}</td>
         <td><span class="badge ${statusBadge}">${statusLabel}</span></td>
         <td style="white-space:nowrap">
-          ${o.durum!=='odendi'?`<button class="btn btn-light btn-xs" onclick="markOdendi('${o.id}')" style="margin-right:4px">Ödendi ✓</button>`:''}
+          ${o.durum!=='odendi'?`<button class="btn btn-light btn-xs" onclick="markOdendi('${o.id}')" style="margin-right:4px">Ödendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button>`:''}
           <button class="btn btn-danger-soft btn-xs" onclick="delOdeme('${o.id}')">Sil</button>
         </td>
       </tr>`;
@@ -4373,12 +4373,12 @@ function saveOdeme(id){
   if(!baslik||!tutar){toast('Başlık ve tutar gerekli','warn');return;}
   const rec={id:id||uid(),baslik,alici:document.getElementById('o-alici').value,kategori:document.getElementById('o-kat').value,tutar,vade:document.getElementById('o-vade').value,tekrar:document.getElementById('o-tekrar').value,durum:document.getElementById('o-durum').value,notlar:document.getElementById('o-not').value};
   if(id){const i=S.odemeTakip.findIndex(x=>x.id===id);S.odemeTakip[i]=rec;}else S.odemeTakip.push(rec);
-  save();closeModal();renderOdemeTakip();toast('Kaydedildi ✓');
+  save();closeModal();renderOdemeTakip();toast('Kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 
 function markOdendi(id){
   const o=S.odemeTakip.find(x=>x.id===id);
-  if(o){o.durum='odendi';save();renderOdemeListesi();toast('Ödeme işaretlendi ✓');}
+  if(o){o.durum='odendi';save();renderOdemeListesi();toast('Ödeme işaretlendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');}
 }
 function delOdeme(id){
   confirmDlg('Ödeme kaydı silinecek','Bu ödeme takip kaydı kaldırılacak. Emin misiniz?','danger',()=>{

@@ -8,7 +8,7 @@ import { toast, showModal, closeModal, confirmDlg } from '../components/ui.js';
  */
 export function renderGiderler() {
   document.getElementById('ph-actions').innerHTML = `
-    <button class="btn btn-ghost btn-sm" onclick="window._openOCRModal()">📄 OCR ile Tara</button>
+    <button class="btn btn-ghost btn-sm" onclick="window._openOCRModal()"><svg class="lucide lucide-file-text inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> OCR ile Tara</button>
     <button class="btn btn-orange" onclick="window._openGiderModal()">+ GİDER EKLE</button>`;
 
   const fbar = document.getElementById('filter-bar');
@@ -68,7 +68,7 @@ window._tGider = function() {
   const tb = document.getElementById('d-tbody'); if (!tb) return;
   if (!rows.length) {
     tb.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:60px;color:var(--t3)">
-      <div style="font-size:36px;margin-bottom:12px">📋</div>
+      <div style="font-size:36px;margin-bottom:12px"><svg class="lucide lucide-clipboard-list inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></div>
       <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:8px">Gider kaydı bulunamadı</div>
       <button class="btn btn-orange btn-sm" onclick="window._openGiderModal()" style="margin-top:6px">+ GİDER EKLE</button>
     </td></tr>`;
@@ -157,7 +157,7 @@ window._calcGider = function() {
 window._handleGiderFile = function(file) {
   if (!file) return;
   const prev = document.getElementById('gider-file-preview');
-  if (prev) { prev.style.display = 'block'; prev.textContent = `✓ ${file.name} seçildi`; }
+  if (prev) { prev.style.display = 'block'; prev.textContent = `<svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> ${file.name} seçildi`; }
 };
 
 window._saveGider = function() {
@@ -176,12 +176,12 @@ window._saveGider = function() {
     durum: document.getElementById('f-d')?.value || 'odendi',
     belgeNo: `GID-${Date.now()}`
   });
-  saveStore(); closeModal(); renderGiderler(); toast('Gider kaydedildi ✓');
+  saveStore(); closeModal(); renderGiderler(); toast('Gider kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._giderOdendi = function(id) {
   const g = S.giderler.find(x => x.id === id);
-  if (g) { g.durum = 'odendi'; saveStore(); window._tGider(); toast('Güncellendi ✓'); }
+  if (g) { g.durum = 'odendi'; saveStore(); window._tGider(); toast('Güncellendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'); }
 };
 
 window._delGider = function(id) {
@@ -201,7 +201,7 @@ window._openOCRModal = function() {
   </div>
   <div class="modal-body">
     <div class="file-drop" id="ocr-drop" onclick="document.getElementById('ocr-input').click()">
-      <div style="font-size:40px;margin-bottom:10px">📄</div>
+      <div style="font-size:40px;margin-bottom:10px"><svg class="lucide lucide-file-text inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></div>
       <div style="font-weight:700;font-size:13px">Fatura / Fiş Fotoğrafını Buraya Bırakın</div>
       <div style="font-size:12px;color:var(--t3);margin-top:5px">veya tıklayarak bilgisayarınızdan seçin</div>
     </div>
@@ -233,13 +233,13 @@ window._simOCR = function() {
   setTimeout(() => {
     const sb2 = document.getElementById('ocr-status-box'); if (sb2) sb2.style.display = 'none';
     const rb = document.getElementById('ocr-result-box'); if (rb) rb.style.display = 'block';
-    toast('Yapay zeka belgeyi başarıyla okudu ✓');
+    toast('Yapay zeka belgeyi başarıyla okudu <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
   }, 1800);
 };
 
 window._applyOCR = function() {
   S.giderler.push({ id: uid(), tarih: TODAY(), kategori: 'Hizmet & Diğer', aciklama: 'OCR Taranmış Belge', tedarikci: 'Çeşitli', tutar: 1250.50, kdvOrani: 20, kdvTutar: 250.10, toplamTutar: 1500.60, durum: 'odendi', belgeNo: `GID-OCR-${Date.now()}` });
-  saveStore(); closeModal(); renderGiderler(); toast('OCR belgesi giderlere eklendi ✓');
+  saveStore(); closeModal(); renderGiderler(); toast('OCR belgesi giderlere eklendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 // ── Export for router ─────────────────────────────────────────────────────────

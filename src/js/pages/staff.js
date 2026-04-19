@@ -212,7 +212,7 @@ window._viewBordro = function(pid, ay) {
       <div class="sign-box">İşveren / Yetkili<br><br><br>${sirket.ad || ''}</div>
       <div class="sign-box">Personel İmzası<br><br><br>${p.ad} ${p.soyad}</div>
     </div>
-    <div style="text-align:center;font-size:10.5px;color:var(--t3);margin-top:16px">Bu bordro GDA Finance sistemi tarafından oluşturulmuştur · ${new Date().toLocaleDateString('tr-TR')}</div>
+    <div style="text-align:center;font-size:10.5px;color:var(--t3);margin-top:16px">Bu bordro Findie sistemi tarafından oluşturulmuştur · ${new Date().toLocaleDateString('tr-TR')}</div>
   </div></div>`;
 };
 window._goBackPersonel = () => renderPersoneller();
@@ -315,7 +315,7 @@ window._savePersonel = function(id) {
   if (!brut) { toast('Brüt maaş giriniz', 'warn'); return; }
   const rec = { id: id || uid(), ad, soyad, tc: document.getElementById('p-tc').value.trim(), pozisyon: document.getElementById('p-poz').value.trim() || 'Personel', departman: document.getElementById('p-dept').value, iseGiris: document.getElementById('p-giris').value, brutMaas: brut, medeni: document.getElementById('p-med').value, cocuk: parseInt(document.getElementById('p-cocuk').value) || 0, es: document.getElementById('p-es').value === 'true', durumu: document.getElementById('p-dur').value, maaslar: id ? S.personeller.find(x => x.id === id).maaslar : [], notlar: document.getElementById('p-not').value };
   if (id) { const i = S.personeller.findIndex(x => x.id === id); S.personeller[i] = rec; } else S.personeller.push(rec);
-  saveStore(); closeModal(); renderPersoneller(); toast('Personel kaydedildi ✓');
+  saveStore(); closeModal(); renderPersoneller(); toast('Personel kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._delPersonel = function(id) {

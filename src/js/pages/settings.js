@@ -203,18 +203,18 @@ function buildModullerTab() {
 
 function buildDashboardTab() {
   const WIDGET_DEFS = [
-    { id: 'kpi_gelir',     icon: '💰', name: 'Gelir KPI Kartı',          desc: 'Toplam gelir ve trend göstergesi' },
-    { id: 'kpi_gider',     icon: '📋', name: 'Gider KPI Kartı',          desc: 'Toplam gider özeti' },
-    { id: 'kpi_net',       icon: '📈', name: 'Net Kâr Kartı',            desc: 'Net kâr/zarar ve kârlılık oranı' },
-    { id: 'kpi_bekleyen',  icon: '⏳', name: 'Bekleyen Tahsilat',        desc: 'Tahsil bekleyen fatura tutarı' },
-    { id: 'trend_chart',   icon: '📊', name: 'Trend Grafiği',            desc: '6 aylık gelir & gider çizgi grafiği' },
-    { id: 'dist_chart',    icon: '🍩', name: 'Dağılım Grafiği',          desc: 'Müşteri bazlı gelir dağılımı' },
-    { id: 'personel',      icon: '👥', name: 'Personel Özeti',           desc: 'Personel listesi ve departman dağılımı' },
-    { id: 'takvim_hafta',  icon: '📅', name: 'Haftalık Takvim',          desc: 'Bu haftaki finansal etkinlikler' },
-    { id: 'son_islemler',  icon: '🕐', name: 'Son İşlemler',             desc: 'En son gelir ve gider kayıtları' },
-    { id: 'kart_ozetleri', icon: '💳', name: 'Kart Özetleri',            desc: 'Şirket kart bakiye ve harcama özeti' },
-    { id: 'fatura_durum',  icon: '📄', name: 'Fatura Durum',             desc: 'Ödendi / bekleyen / gecikmiş sayıları' },
-    { id: 'musteri_top',   icon: '🏆', name: 'En İyi Müşteriler',        desc: 'Gelire göre en iyi 5 müşteri' },
+    { id: 'kpi_gelir',     icon: '<svg class="lucide lucide-coins inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>', name: 'Gelir KPI Kartı',          desc: 'Toplam gelir ve trend göstergesi' },
+    { id: 'kpi_gider',     icon: '<svg class="lucide lucide-clipboard-list inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>', name: 'Gider KPI Kartı',          desc: 'Toplam gider özeti' },
+    { id: 'kpi_net',       icon: '<svg class="lucide lucide-trending-up inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>', name: 'Net Kâr Kartı',            desc: 'Net kâr/zarar ve kârlılık oranı' },
+    { id: 'kpi_bekleyen',  icon: '<svg class="lucide lucide-hourglass inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>', name: 'Bekleyen Tahsilat',        desc: 'Tahsil bekleyen fatura tutarı' },
+    { id: 'trend_chart',   icon: '<svg class="lucide lucide-bar-chart-2 inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>', name: 'Trend Grafiği',            desc: '6 aylık gelir & gider çizgi grafiği' },
+    { id: 'dist_chart',    icon: '<svg class="lucide lucide-pie-chart inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>', name: 'Dağılım Grafiği',          desc: 'Müşteri bazlı gelir dağılımı' },
+    { id: 'personel',      icon: '<svg class="lucide lucide-users inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>', name: 'Personel Özeti',           desc: 'Personel listesi ve departman dağılımı' },
+    { id: 'takvim_hafta',  icon: '<svg class="lucide lucide-calendar inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>', name: 'Haftalık Takvim',          desc: 'Bu haftaki finansal etkinlikler' },
+    { id: 'son_islemler',  icon: '<svg class="lucide lucide-clock inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>', name: 'Son İşlemler',             desc: 'En son gelir ve gider kayıtları' },
+    { id: 'kart_ozetleri', icon: '<svg class="lucide lucide-credit-card inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>', name: 'Kart Özetleri',            desc: 'Şirket kart bakiye ve harcama özeti' },
+    { id: 'fatura_durum',  icon: '<svg class="lucide lucide-file-text inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>', name: 'Fatura Durum',             desc: 'Ödendi / bekleyen / gecikmiş sayıları' },
+    { id: 'musteri_top',   icon: '<svg class="lucide lucide-trophy inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>', name: 'En İyi Müşteriler',        desc: 'Gelire göre en iyi 5 müşteri' },
   ];
   const current = { kpi_gelir:true, kpi_gider:true, kpi_net:true, kpi_bekleyen:true, trend_chart:true, dist_chart:true, personel:true, takvim_hafta:true, son_islemler:true, kart_ozetleri:true, fatura_durum:true, musteri_top:true, ...(S.settings.dashboardWidgets||{}) };
 
@@ -250,7 +250,7 @@ window._toggleDashWidget = function(id, on) {
   const card = document.getElementById('wcard-' + id);
   if (card) card.classList.toggle('widget-on', on);
   saveStore();
-  toast(on ? 'Widget eklendi ✓' : 'Widget kaldırıldı', 'ok');
+  toast(on ? 'Widget eklendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' : 'Widget kaldırıldı', 'ok');
 };
 
 window._dashWidgetAll = function(on) {
@@ -282,14 +282,14 @@ window._saveSirket = function() {
   saveStore();
   const cn = document.querySelector('.sn-cn'); if (cn) cn.textContent = s.ad;
   const cs = document.querySelector('.sn-cs'); if (cs) cs.textContent = `VKN: ${s.vkn || '—'}`;
-  toast('Şirket bilgileri kaydedildi ✓');
+  toast('Şirket bilgileri kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };
 
 window._loadLogo = function(input) {
   const file = input.files[0]; if (!file) return;
   if (file.size > 2 * 1024 * 1024) { toast("Logo 2MB'dan küçük olmalı", 'warn'); return; }
   const reader = new FileReader();
-  reader.onload = e => { S.settings.sirket.logo = e.target.result; saveStore(); renderAyarlar(); toast('Logo yüklendi ✓'); };
+  reader.onload = e => { S.settings.sirket.logo = e.target.result; saveStore(); renderAyarlar(); toast('Logo yüklendi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'); };
   reader.readAsDataURL(file);
 };
 
@@ -325,7 +325,7 @@ window._saveDriveSettings = function() {
   S.settings.depolama.driveFolderUrl = document.getElementById('dep-url')?.value.trim() || '';
   S.settings.depolama.driveApiKey = document.getElementById('dep-key')?.value.trim() || '';
   S.settings.depolama.driveClientId = document.getElementById('dep-cid')?.value.trim() || '';
-  saveStore(); toast('Drive ayarları kaydedildi ✓');
+  saveStore(); toast('Drive ayarları kaydedildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
   renderAyarlar(); window._switchStabS(3, 's');
 };
 
@@ -339,7 +339,7 @@ window._testDriveConn = async function() {
     const fid = url.match(/folders\/([a-zA-Z0-9_-]+)/)?.[1];
     if (!fid) throw new Error('Geçersiz URL');
     const res = await fetch(`https://www.googleapis.com/drive/v3/files/${fid}?key=${key}&fields=id,name`);
-    if (res.ok) { const d = await res.json(); r.innerHTML = `<div class="ocr-status ok">✓ Bağlantı başarılı · Klasör: "${d.name}"</div>`; }
+    if (res.ok) { const d = await res.json(); r.innerHTML = `<div class="ocr-status ok"><svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Bağlantı başarılı · Klasör: "${d.name}"</div>`; }
     else throw new Error((await res.json()).error?.message || 'Erişim reddedildi');
   } catch (e) { r.innerHTML = `<div class="ocr-status fail">✗ ${e.message}</div>`; }
 };

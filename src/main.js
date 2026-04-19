@@ -3,7 +3,7 @@ import { navigate } from './js/core/router.js';
 import { initProfilePopover } from './js/components/profile-actions.js';
 
 /**
- * GDA Finance Main Entry Point
+ * Findie Main Entry Point
  * Initializing application state and global UI handlers.
  */
 

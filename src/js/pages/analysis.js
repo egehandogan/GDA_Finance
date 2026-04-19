@@ -268,14 +268,14 @@ export function renderAiPitch() {
 
   const yillar = [...new Set([...S.gelirler, ...S.giderler].map(x => x.tarih.slice(0, 4)))].sort();
   const sections = [
-    { id: 'ozet',       lbl: '📊 Finansal Özet', desc: 'Gelir, gider, net kâr özeti' },
-    { id: 'gelirler',   lbl: '💰 Gelir Analizi',  desc: 'Kategori ve müşteri bazlı gelirler' },
-    { id: 'giderler',   lbl: '📋 Gider Analizi',  desc: 'Kategori bazlı gider dağılımı' },
-    { id: 'karlılık',   lbl: '📈 Kârlılık Trendi', desc: 'Aylık net kâr trendi' },
-    { id: 'musteriler', lbl: '👥 Müşteri Portföyü', desc: 'En değerli müşteriler' },
+    { id: 'ozet',       lbl: '<svg class="lucide lucide-bar-chart-2 inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg> Finansal Özet', desc: 'Gelir, gider, net kâr özeti' },
+    { id: 'gelirler',   lbl: '<svg class="lucide lucide-coins inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg> Gelir Analizi',  desc: 'Kategori ve müşteri bazlı gelirler' },
+    { id: 'giderler',   lbl: '<svg class="lucide lucide-clipboard-list inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg> Gider Analizi',  desc: 'Kategori bazlı gider dağılımı' },
+    { id: 'karlılık',   lbl: '<svg class="lucide lucide-trending-up inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg> Kârlılık Trendi', desc: 'Aylık net kâr trendi' },
+    { id: 'musteriler', lbl: '<svg class="lucide lucide-users inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Müşteri Portföyü', desc: 'En değerli müşteriler' },
     { id: 'personel',   lbl: '🧑‍💼 Personel Maliyeti', desc: 'Bordro ve maaş özeti' },
     { id: 'kdv',        lbl: '🧾 KDV Özeti',       desc: 'KDV durumu ve beyanları' },
-    { id: 'faturalar',  lbl: '📄 Fatura Durumu',   desc: 'Ödendi / bekleyen faturalar' },
+    { id: 'faturalar',  lbl: '<svg class="lucide lucide-file-text inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Fatura Durumu',   desc: 'Ödendi / bekleyen faturalar' },
   ];
 
   document.getElementById('page-body').innerHTML = `
@@ -284,7 +284,7 @@ export function renderAiPitch() {
       <div style="display:flex;flex-direction:column;gap:14px">
         <div class="card cp">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-            <div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:18px">🚀</div>
+            <div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:18px"><svg class="lucide lucide-rocket inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
             <div>
               <div style="font-size:14px;font-weight:800;color:var(--t1)">AI Pitch</div>
               <div style="font-size:11.5px;color:var(--t3)">Yatırımcı sunum üreticisi</div>
@@ -310,7 +310,7 @@ export function renderAiPitch() {
             </label>`).join('')}
           </div>
           <button class="btn" id="pitch-start-btn" onclick="window._startPitch()" style="width:100%;justify-content:center;padding:12px;font-size:13.5px;font-weight:700;background:linear-gradient(135deg,#6366F1,#8B5CF6);color:#fff;border-radius:10px;gap:8px">
-            🚀 Sunumu Oluştur
+            <svg class="lucide lucide-rocket inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg> Sunumu Oluştur
           </button>
         </div>
       </div>
@@ -320,9 +320,9 @@ export function renderAiPitch() {
         <div style="font-size:18px;font-weight:800;color:var(--t1);margin-bottom:10px">Sunum Hazır Değil</div>
         <div style="font-size:13.5px;color:var(--t3);max-width:300px;line-height:1.6">Sol panelden dönem ve bölüm seçimini yaparak "Sunumu Oluştur" butonuna tıklayın.</div>
         <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
-          <span style="padding:5px 12px;border-radius:99px;background:var(--blue-50);color:var(--blue);font-size:11px;font-weight:600">📊 Finansal Analiz</span>
-          <span style="padding:5px 12px;border-radius:99px;background:var(--green-50);color:var(--green);font-size:11px;font-weight:600">📄 PDF İndir</span>
-          <span style="padding:5px 12px;border-radius:99px;background:var(--amber-50);color:var(--amber);font-size:11px;font-weight:600">📊 Excel İndir</span>
+          <span style="padding:5px 12px;border-radius:99px;background:var(--blue-50);color:var(--blue);font-size:11px;font-weight:600"><svg class="lucide lucide-bar-chart-2 inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg> Finansal Analiz</span>
+          <span style="padding:5px 12px;border-radius:99px;background:var(--green-50);color:var(--green);font-size:11px;font-weight:600"><svg class="lucide lucide-file-text inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> PDF İndir</span>
+          <span style="padding:5px 12px;border-radius:99px;background:var(--amber-50);color:var(--amber);font-size:11px;font-weight:600"><svg class="lucide lucide-bar-chart-2 inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg> Excel İndir</span>
         </div>
       </div>
     </div>`;
@@ -344,7 +344,7 @@ window._startPitch = function() {
   const overlay = document.createElement('div');
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)';
   overlay.innerHTML = `<div style="background:var(--white);border-radius:20px;padding:40px 48px;text-align:center;max-width:440px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,.3)">
-    <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px">🚀</div>
+    <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px"><svg class="lucide lucide-rocket inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
     <div style="font-size:20px;font-weight:800;color:var(--t1);margin-bottom:8px">AI Pitch Oluşturuluyor</div>
     <div id="pitch-step" style="font-size:13.5px;color:var(--t3);margin-bottom:24px;min-height:20px">${steps[0]}</div>
     <div style="background:var(--border2);border-radius:99px;height:6px;overflow:hidden">
@@ -367,7 +367,7 @@ window._startPitch = function() {
       setTimeout(() => {
         document.body.removeChild(overlay);
         const btn = document.getElementById('pitch-start-btn');
-        if (btn) { btn.disabled = false; btn.innerHTML = '🚀 Sunumu Oluştur'; }
+        if (btn) { btn.disabled = false; btn.innerHTML = '<svg class="lucide lucide-rocket inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg> Sunumu Oluştur'; }
         window._showPitchModal(bas, bit, secili);
       }, 600);
     }
@@ -538,18 +538,18 @@ window._showPitchModal = function(bas, bit, secili) {
       <div style="background:linear-gradient(135deg,${pitchColor},${pitchAccent});border-radius:12px;padding:24px;text-align:center;color:#fff;margin-top:12px">
         <div style="font-size:14px;font-weight:700;margin-bottom:6px">${sirket.ad || 'Şirket A.Ş.'}</div>
         <div style="font-size:11.5px;opacity:.8">${period} Dönemi Finansal Sunum</div>
-        <div style="font-size:10.5px;opacity:.6;margin-top:8px">Bu sunum GDA Finance sistemi tarafından otomatik oluşturulmuştur.</div>
+        <div style="font-size:10.5px;opacity:.6;margin-top:8px">Bu sunum Findie sistemi tarafından otomatik oluşturulmuştur.</div>
       </div>
     </div>`;
 
   showModal(`<div class="modal-hdr">
     <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff">🚀</div>
+      <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff"><svg class="lucide lucide-rocket inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
       <div class="modal-title">Yatırımcı Sunumu — ${period}</div>
     </div>
     <div style="display:flex;gap:8px">
-      <button class="btn btn-light btn-sm" onclick="window._pitchExcel()">📊 Excel</button>
-      <button class="btn btn-orange btn-sm" onclick="window._pitchPDF()">📄 PDF İndir</button>
+      <button class="btn btn-light btn-sm" onclick="window._pitchExcel()"><svg class="lucide lucide-bar-chart-2 inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg> Excel</button>
+      <button class="btn btn-orange btn-sm" onclick="window._pitchPDF()"><svg class="lucide lucide-file-text inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> PDF İndir</button>
       <button class="modal-close" onclick="window.closeModal()">×</button>
     </div>
   </div>
@@ -569,7 +569,7 @@ window._pitchPDF = function() {
     const content = document.getElementById('pitch-content');
     if (!content) return;
     const printWin = window.open('', '', 'width=900,height=700');
-    printWin.document.write(`<!DOCTYPE html><html><head><title>AI Pitch — ${window._pitchData?.sirket?.ad || 'GDA Finance'}</title>
+    printWin.document.write(`<!DOCTYPE html><html><head><title>AI Pitch — ${window._pitchData?.sirket?.ad || 'Findie'}</title>
     <style>body{margin:0;font-family:'Outfit',sans-serif;background:#fff;color:#111}@page{margin:0}</style></head>
     <body>${content.innerHTML}</body></html>`);
     printWin.document.close();
@@ -580,7 +580,7 @@ window._pitchPDF = function() {
 window._pitchExcel = function() {
   const d = window._pitchData || {};
   const rows = [
-    ['GDA Finance — Finansal Sunum', d.period || '', '', ''],
+    ['Findie — Finansal Sunum', d.period || '', '', ''],
     ['Şirket', d.sirket?.ad || '', '', ''],
     ['', '', '', ''],
     ['ÖZET', '', '', ''],
@@ -600,5 +600,5 @@ window._pitchExcel = function() {
   a.href = URL.createObjectURL(blob);
   a.download = `GDA_Pitch_${d.period || 'rapor'}.csv`;
   a.click();
-  toast('Excel (CSV) dosyası indirildi ✓');
+  toast('Excel (CSV) dosyası indirildi <svg class="lucide lucide-check inline-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
 };

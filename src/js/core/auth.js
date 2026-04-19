@@ -45,7 +45,7 @@ function renderLoginPage(err = '') {
             <div class="auth-card anim-scale">
                 <div class="auth-header">
                     <div class="auth-logo">GF</div>
-                    <h2 class="auth-title">GDA Finance</h2>
+                    <h2 class="auth-title">Findie</h2>
                     <p class="auth-subtitle">Kurumsal Finans Arayüzü v8.2</p>
                 </div>
                 
