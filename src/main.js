@@ -1,5 +1,6 @@
 import { S, loadStore } from './js/core/state.js';
 import { navigate } from './js/core/router.js';
+import { initProfilePopover } from './js/components/profile-actions.js';
 
 /**
  * GDA Finance Main Entry Point
@@ -61,9 +62,8 @@ function initApp() {
     // 4. Initialize Sidebar Modules
     updateSidebarModules();
 
-    // 5. Profile trigger listener
-    const trigger = document.getElementById('sn-company-card');
-    if (trigger) trigger.onclick = window.toggleProfileMenu;
+    // 5. Profile popover setup
+    initProfilePopover();
 
     // 6. Initial Navigation
     navigate(S.view || 'dashboard');
@@ -71,10 +71,12 @@ function initApp() {
 
 function syncBranding() {
     const s = S.settings.sirket;
+    const u = S.user || {};
+
+    // Sidebar company card
     const nameEl = document.querySelector('.sn-cn');
     const vknEl = document.querySelector('.sn-cs');
     const logoEl = document.querySelector('.sn-av');
-
     if (nameEl) nameEl.textContent = s.ad || 'Şirket Adı';
     if (vknEl) vknEl.textContent = `VKN: ${s.vkn || '—'}`;
     if (logoEl && s.logo) {
@@ -82,6 +84,14 @@ function syncBranding() {
     } else if (logoEl) {
         logoEl.textContent = (s.ad || 'Ş')[0].toUpperCase();
     }
+
+    // Popover user card
+    const ppAv   = document.getElementById('pp-user-av');
+    const ppName = document.getElementById('pp-user-name');
+    const ppRole = document.getElementById('pp-user-role');
+    if (ppAv)   ppAv.textContent   = (u.name || u.email || 'A')[0].toUpperCase();
+    if (ppName) ppName.textContent = u.name || u.email || 'Kullanıcı';
+    if (ppRole) ppRole.textContent = u.role || 'Viewer';
 }
 
 /**
