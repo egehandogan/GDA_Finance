@@ -192,7 +192,7 @@ function openPersonelModal(id) {
         };
 
         if (p) {
-            const idx = S.personeller.findIndex(x => x.id === id);
+            const idx = S.personeller.findIndex(x => x.id === p.id);
             S.personeller[idx] = data;
         } else {
             S.personeller.push(data);

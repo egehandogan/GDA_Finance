@@ -62,3 +62,13 @@ export const musInit = (id) => {
     return n.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
 };
 
+export const hashColor = (str) => {
+    if (!str) return '#2563EB';
+    const h = ['#2563EB', '#7C3AED', '#059669', '#D97706', '#DC2626', '#0891B2', '#BE185D', '#065F46'];
+    let n = 0;
+    for (let i = 0; i < str.length; i++) {
+        n = (n * 31 + str.charCodeAt(i)) & 0xFFFF;
+    }
+    return h[n % h.length];
+};
+
