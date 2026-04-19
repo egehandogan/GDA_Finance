@@ -3,6 +3,53 @@
  * Standardized formatting for Currency, Dates, and UI helpers
  */
 
+// Month names (short)
+export const MS = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+
+// Month names (long)
+export const MS_LONG = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+
+// KDV rates
+export const KDV = [0, 1, 10, 20];
+
+// Expense categories (Gider)
+export const GIDER_KAT = [
+  'Kira','Personel Gideri','Ulaşım','Yazılım & Abonelik',
+  'Ofis Malzemeleri','Pazarlama','Hukuk & Muhasebe',
+  'Vergi & Resimler','Akaryakıt','Yemek','Telefon & İnternet','Diğer'
+];
+
+// Card types
+export const KART_TIPLER = [
+  {val:'yol',lbl:'Yol Kartı',icon:'🚌',desc:'Ulaşım'},
+  {val:'yemek',lbl:'Yemek Kartı',icon:'🍽️',desc:'Yemek'},
+  {val:'sirket',lbl:'Şirket Kredi Kartı',icon:'💳',desc:'Genel'},
+  {val:'akaryakit',lbl:'Akaryakıt Kartı',icon:'⛽',desc:'Yakıt'},
+  {val:'diger',lbl:'Diğer Kart',icon:'🪪',desc:'Diğer'},
+];
+
+// Card color classes
+export const KART_RENKLER = [
+  {val:'kart-siyah',lbl:'Siyah'},
+  {val:'kart-mavi',lbl:'Mavi'},
+  {val:'kart-yesil',lbl:'Yeşil'},
+  {val:'kart-mor',lbl:'Mor'},
+  {val:'kart-kirmizi',lbl:'Kırmızı'},
+  {val:'kart-turuncu',lbl:'Turuncu'},
+];
+
+// Work task statuses
+export const IS_DURUMLAR = [
+  {val:'bekliyor',lbl:'Bekliyor',color:'#9CA3AF'},
+  {val:'devam',lbl:'Devam Ediyor',color:'#2563EB'},
+  {val:'inceleme',lbl:'İncelemede',color:'#D97706'},
+  {val:'yapildi',lbl:'Tamamlandı',color:'#059669'},
+  {val:'iptal',lbl:'İptal',color:'#DC2626'},
+];
+
+// ASG (minimum wage 2025)
+export const ASG_UCRET = 22104;
+
 // Currency Formatter (TL)
 export const TL = (n) =>
   new Intl.NumberFormat('tr-TR', {

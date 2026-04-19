@@ -34,12 +34,12 @@
         <!-- Sidebar items rendered dynamically -->
       </div>
 
-      <div class="sn-footer">
-        <div class="sn-company" id="profile-trigger">
-          <div class="sn-av">G</div>
+      <div class="sn-footer" style="position:relative">
+        <div class="sn-company" id="sn-company-card">
+          <div class="sn-av">Ş</div>
           <div class="sn-info">
-            <div style="font-size:12px;font-weight:600;color:var(--t1)">GDA Kurumsal</div>
-            <div style="font-size:10.5px;color:var(--t3)">Admin Paneli</div>
+            <div class="sn-cn">Şirket Adı</div>
+            <div class="sn-cs">VKN: —</div>
           </div>
         </div>
       </div>
@@ -49,9 +49,9 @@
     <main id="content">
       <header class="topbar no-print">
         <div class="tb-nav">
-          <button class="tb-arrow">‹</button>
+          <button class="tb-arrow" title="Geri">‹</button>
           <span class="tb-sep">/</span>
-          <span class="tb-crumb">Finance</span>
+          <span class="tb-crumb" onclick="navigate('dashboard')">Finance</span>
           <span class="tb-sep">/</span>
           <span class="tb-crumb current" id="tb-current-crumb">Genel Bakış</span>
         </div>
@@ -83,7 +83,7 @@
 
     <!-- Profile Popover -->
     <div class="profile-popover" id="profile-popover">
-      <div class="pp-item"><span>🎧</span> Destek Talebi</div>
+      <div class="pp-item pp-support"><span>🎧</span> Destek Talebi</div>
       <div class="pp-item"><span>⚙️</span> Ayarlar</div>
       <div class="pp-sep"></div>
       <div class="pp-item danger" onclick="logout()"><span>🚪</span> Çıkış Yap</div>
