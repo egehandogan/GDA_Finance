@@ -31,17 +31,19 @@ export function renderAyarlar() {
       <button class="stab" onclick="window._switchStabS(1,'s')">Vergi Ayarları</button>
       <button class="stab" onclick="window._switchStabS(2,'s')">Satış Kanalları</button>
       <button class="stab" onclick="window._switchStabS(3,'s')">Depolama / Drive</button>
-      <button class="stab" onclick="window._switchStabS(4,'s')">Kişiselleştirme</button>
+      <button class="stab" onclick="window._switchStabS(4,'s')">Dashboard Widgets</button>
+      <button class="stab" onclick="window._switchStabS(5,'s')">Kişiselleştirme</button>
     </div>
     <div id="stab-s-0">${buildSirketTab()}</div>
     <div id="stab-s-1" style="display:none">${buildVergiTab()}</div>
     <div id="stab-s-2" style="display:none">${buildKanallarTab()}</div>
     <div id="stab-s-3" style="display:none">${buildDepolamaTab()}</div>
-    <div id="stab-s-4" style="display:none">${buildModullerTab()}</div>`;
+    <div id="stab-s-4" style="display:none">${buildDashboardTab()}</div>
+    <div id="stab-s-5" style="display:none">${buildModullerTab()}</div>`;
 
   window._switchStabS = (idx, prefix) => {
     document.querySelectorAll('.stab').forEach((b, i) => b.classList.toggle('active', i === idx));
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       const el = document.getElementById(`stab-${prefix}-${i}`);
       if (el) el.style.display = i === idx ? 'block' : 'none';
     }
@@ -198,6 +200,69 @@ function buildModullerTab() {
     </div>
   </div>`;
 }
+
+function buildDashboardTab() {
+  const WIDGET_DEFS = [
+    { id: 'kpi_gelir',     icon: '💰', name: 'Gelir KPI Kartı',          desc: 'Toplam gelir ve trend göstergesi' },
+    { id: 'kpi_gider',     icon: '📋', name: 'Gider KPI Kartı',          desc: 'Toplam gider özeti' },
+    { id: 'kpi_net',       icon: '📈', name: 'Net Kâr Kartı',            desc: 'Net kâr/zarar ve kârlılık oranı' },
+    { id: 'kpi_bekleyen',  icon: '⏳', name: 'Bekleyen Tahsilat',        desc: 'Tahsil bekleyen fatura tutarı' },
+    { id: 'trend_chart',   icon: '📊', name: 'Trend Grafiği',            desc: '6 aylık gelir & gider çizgi grafiği' },
+    { id: 'dist_chart',    icon: '🍩', name: 'Dağılım Grafiği',          desc: 'Müşteri bazlı gelir dağılımı' },
+    { id: 'personel',      icon: '👥', name: 'Personel Özeti',           desc: 'Personel listesi ve departman dağılımı' },
+    { id: 'takvim_hafta',  icon: '📅', name: 'Haftalık Takvim',          desc: 'Bu haftaki finansal etkinlikler' },
+    { id: 'son_islemler',  icon: '🕐', name: 'Son İşlemler',             desc: 'En son gelir ve gider kayıtları' },
+    { id: 'kart_ozetleri', icon: '💳', name: 'Kart Özetleri',            desc: 'Şirket kart bakiye ve harcama özeti' },
+    { id: 'fatura_durum',  icon: '📄', name: 'Fatura Durum',             desc: 'Ödendi / bekleyen / gecikmiş sayıları' },
+    { id: 'musteri_top',   icon: '🏆', name: 'En İyi Müşteriler',        desc: 'Gelire göre en iyi 5 müşteri' },
+  ];
+  const current = { kpi_gelir:true, kpi_gider:true, kpi_net:true, kpi_bekleyen:true, trend_chart:true, dist_chart:true, personel:true, takvim_hafta:true, son_islemler:true, kart_ozetleri:true, fatura_durum:true, musteri_top:true, ...(S.settings.dashboardWidgets||{}) };
+
+  return `<div class="settings-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+      <div class="settings-section" style="margin-bottom:0;border:none;padding:0">Dashboard Widget Yönetimi</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-light btn-sm" onclick="window._dashWidgetAll(true)">Tümünü Aç</button>
+        <button class="btn btn-light btn-sm" onclick="window._dashWidgetAll(false)">Tümünü Kapat</button>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--t3);margin-bottom:18px">Dashboard'da görüntülenecek widget'ları buradan seçin. Değişiklikler dashboard'a anında yansır.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px">
+      ${WIDGET_DEFS.map(w => {
+        const on = current[w.id] !== false;
+        return `<div class="widget-card ${on ? 'widget-on' : ''}" id="wcard-${w.id}">
+          <div style="font-size:22px;margin-bottom:8px">${w.icon}</div>
+          <div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:3px">${w.name}</div>
+          <div style="font-size:11.5px;color:var(--t3);margin-bottom:12px;line-height:1.4">${w.desc}</div>
+          <label class="toggle" style="margin-top:auto">
+            <input type="checkbox" id="wsw-${w.id}" ${on ? 'checked' : ''} onchange="window._toggleDashWidget('${w.id}',this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+window._toggleDashWidget = function(id, on) {
+  if (!S.settings.dashboardWidgets) S.settings.dashboardWidgets = {};
+  S.settings.dashboardWidgets[id] = on;
+  const card = document.getElementById('wcard-' + id);
+  if (card) card.classList.toggle('widget-on', on);
+  saveStore();
+  toast(on ? 'Widget eklendi ✓' : 'Widget kaldırıldı', 'ok');
+};
+
+window._dashWidgetAll = function(on) {
+  if (!S.settings.dashboardWidgets) S.settings.dashboardWidgets = {};
+  ['kpi_gelir','kpi_gider','kpi_net','kpi_bekleyen','trend_chart','dist_chart','personel','takvim_hafta','son_islemler','kart_ozetleri','fatura_durum','musteri_top'].forEach(id => {
+    S.settings.dashboardWidgets[id] = on;
+    const cb = document.getElementById('wsw-' + id); if (cb) cb.checked = on;
+    const card = document.getElementById('wcard-' + id); if (card) card.classList.toggle('widget-on', on);
+  });
+  saveStore();
+  toast(on ? 'Tüm widgetlar açıldı' : 'Tüm widgetlar kapatıldı', 'ok');
+};
 
 // ── Global Actions ─────────────────────────────────────────────────────────────
 window._saveSettings = function() { saveStore(); toast('Kaydedildi'); };

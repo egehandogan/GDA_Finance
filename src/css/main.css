@@ -784,7 +784,25 @@ label { font-size: 12px; font-weight: 600; color: var(--t2); }
 #fn-items td { vertical-align: middle; }
 #fn-items input, #fn-items select { padding: 5px 7px; font-size: 12px; border-radius: 6px; }
 
-/* ══ SPIN ANIMATION ══ */
-@keyframes spin { to { transform: rotate(360deg); } }
+/* ══ WIDGET CARDS (Dashboard Settings) ══ */
+.widget-card {
+  display: flex; flex-direction: column; padding: 16px; border: 1.5px solid var(--border);
+  border-radius: var(--rlg); background: var(--white); transition: all .2s; cursor: default;
+  opacity: .55;
+}
+.widget-card.widget-on { opacity: 1; border-color: var(--blue); background: var(--blue-50); }
+.widget-card .toggle { margin-top: auto; }
 
+/* ══ ANAL GRID ══ */
+.anal-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; }
+.anal-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
+/* ══ FILE DROP ══ */
+.file-drop { border: 2px dashed var(--border); border-radius: var(--rlg); padding: 28px 24px; text-align: center; cursor: pointer; transition: all .2s; }
+.file-drop:hover, .file-drop.drag { border-color: var(--blue); background: var(--blue-50); }
+
+/* ══ KPI CHANGE neutral ══ */
+.kpi-change.neutral { color: var(--t3); }
+
+/* ══ PITCH SEC LABEL ══ */
+.pitch-sec-lbl:has(input:checked) { border-color: #6366F1; background: rgba(99,102,241,.06); }
