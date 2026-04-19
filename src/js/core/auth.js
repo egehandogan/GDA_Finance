@@ -1,7 +1,7 @@
-import { S, saveStore } from './core/state.js';
-import { DEMO_USERS } from './core/constants.js';
-import { toast } from './components/ui.js';
-import { navigate } from './core/router.js';
+import { S, saveStore } from './state.js';
+import { DEMO_USERS } from './constants.js';
+import { toast } from '../components/ui.js';
+import { navigate } from './router.js';
 
 /**
  * Authentication Service
